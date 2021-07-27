@@ -85,37 +85,99 @@ namespace ParadiseVille
                 TextClean();
                 CityData dat = new CityData(mode, hexCode);
 
-                TextWrite("ID", dat.str_id, 30f, 50f, 12, Color.red);
+                HeadData();
+                GeneralData(30f, 230f, 30f, 12, 12);
+                MaisonData(30f, 480f, 25f, 12, 10);
+                EmployersData(30f, 705f, 25f, 12, 10);
+                PublicData(350f, 480f, 25f, 12, 10);
 
-                TextWrite(dat.quartier, 350f, 50f, 16, Color.red);
-                TextWrite("Canton", dat.canton, 30f, 110f, 14, Color.black);
-                TextWrite("Villette", dat.villette, 30f, 160f, 14, Color.black);
+                void HeadData()
+                {
+                    if (dat.str_id != "0")
+                    {
+                        TextWrite("ID", dat.str_id, 30f, 50f, 12, Color.red);
+                        TextWrite(dat.quartier, 350f, 50f, 16, Color.red);
+                        TextWrite("Canton", dat.canton, 30f, 110f, 14, Color.black);
+                        TextWrite("Villette", dat.villette, 30f, 160f, 14, Color.black);
+                    }
+                }
 
-                TextWrite("COMMUNAUTÉ", 30f, 230f, 12, Color.red);
-                TextWrite("Résidents", dat.str_residents, 30f, 270f, 12, Color.black);
-                TextWrite("Employés", dat.str_employ, 30f, 300f, 12, Color.black);
-                TextWrite("Superficie", dat.str_superf, 30f, 330f, 12, Color.black);
-                TextWrite("Densité", dat.str_denct, 30f, 360f, 12, Color.black);
+                void GeneralData(float start_x, float start_y, float step, int sizeHead, int sizeElems)
+                {
+                    if (dat.str_id != "0")
+                    {
+                        TextWrite("COMMUNAUTÉ", start_x, start_y, sizeHead, Color.red);
+                        start_y += sizeHead;
 
-                TextWrite("MAISONS", 30f, 410f, 12, Color.red);
-                TextWrite(dat.maisons[0], 30f, 450f, 12, Color.black);
-                TextWrite(dat.maisons[1], 30f, 480f, 12, Color.black);
-                TextWrite(dat.maisons[2], 30f, 510f, 12, Color.black);
-                TextWrite(dat.maisons[3], 30f, 540f, 12, Color.black);
-                TextWrite(dat.maisons[4], 30f, 570f, 12, Color.black);
-                TextWrite(dat.maisons[5], 30f, 600f, 12, Color.black);
-                TextWrite(dat.maisons[6], 30f, 630f, 12, Color.black);
+                        start_y = DrawWithReturnPos("Résidents", dat.str_residents, start_x, start_y + step, sizeElems, Color.black);
+                        start_y = DrawWithReturnPos("Employés", dat.str_employ, start_x, start_y + step, sizeElems, Color.black);
+                        start_y = DrawWithReturnPos("Superficie", dat.str_superf, start_x, start_y + step, sizeElems, Color.black);
+                        start_y = DrawWithReturnPos("Densité repos", dat.str_denct, start_x, start_y + step, sizeElems, Color.black);
+                        start_y = DrawWithReturnPos("Densité actif", dat.str_denstwork, start_x, start_y + step, sizeElems, Color.black);
+                        DrawWithReturnPos("Député", dat.str_deputat, start_x, start_y + step, sizeElems, Color.black);
+                    }
+                }
 
-                TextWrite("EMPLOI", 30f, 680f, 12, Color.red);
-                TextWrite("Production", dat.employe[0], 30f, 720f, 12, Color.black);
-                TextWrite("Bureau", dat.employe[1], 30f, 750f, 12, Color.black);
-                TextWrite("Commerce", dat.employe[2], 30f, 780f, 12, Color.black);
-                TextWrite("Culture", dat.employe[3], 30f, 810f, 12, Color.black);
-                TextWrite("Hôtel", dat.employe[4], 30f, 840f, 12, Color.black);
-                TextWrite("Éducation", dat.employe[5], 30f, 870f, 12, Color.black);
-                TextWrite("Services d'utilité", dat.employe[6], 30f, 900f, 12, Color.black);
-                TextWrite("Sport", dat.employe[7], 30f, 930f, 12, Color.black);
-                TextWrite("Administration", dat.employe[8], 30f, 960f, 12, Color.black);
+                void MaisonData(float start_x, float start_y, float step, int sizeHead, int sizeElems)
+                {
+                    int size = dat.maisons.Length - 1;
+                    float headAdd = 10f;
+                    bool dataExists = false;
+
+                    for(byte i = 0; i < size; i++)
+                    {
+                        if(dat.maisons[i] != " ")
+                        {
+                            TextWrite(dat.maisons[i], start_x, start_y + (i + 1) * step + headAdd, sizeElems, Color.black);
+                            if (!dataExists) dataExists = true;
+                        }
+                    }
+
+                    if (dataExists) TextWrite("MAISONS", start_x, start_y, sizeHead, Color.red);
+                }
+
+                void EmployersData(float start_x, float start_y, float step, int sizeHead, int sizeElems)
+                {
+                    if (dat.str_id != "0")
+                    {
+                        int size = dat.employe.Length - 1;
+                        float headAdd = 10f;
+                        string[] keys = new string[10] {
+                        "Production", "Bureau", "Commerce", "Culture", "Hôtel",
+                        "Éducation",  "Médecine", "Services d'utilité", "Sport", "Administration"};
+
+                        TextWrite("EMPLOI", start_x, start_y, sizeHead, Color.red);
+
+                        for (byte i = 0; i < size; i++)
+                        {
+                            TextWrite(keys[i], dat.employe[i], start_x, start_y + (i + 1) * step + headAdd, sizeElems, Color.black);
+                        }
+                    }
+                }
+
+                void PublicData(float start_x, float start_y, float step, int sizeHead, int sizeElems)
+                {
+                    int size = dat.place.Length - 1;
+                    float headAdd = 10f;
+                    bool dataExists = false;
+
+                    for (byte i = 0; i < size; i++)
+                    {
+                        if (dat.place[i] != " ")
+                        {
+                            TextWrite(dat.place[i], start_x, start_y + (i + 1) * step + headAdd, sizeElems, Color.black);
+                            if (!dataExists) dataExists = true;
+                        }
+                    }
+
+                    if (dataExists) TextWrite("ESPACE PUBLIC", start_x, start_y, sizeHead, Color.red);
+                }
+
+                float DrawWithReturnPos(string name, string text, float fx, float fy, int size, Color col)
+                {
+                    TextWrite(name, text, fx, fy, size, col);
+                    return fy;
+                }
             }
         }
 

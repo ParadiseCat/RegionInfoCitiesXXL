@@ -1,19 +1,22 @@
-﻿
+﻿using UnityEngine;
 
 namespace ParadiseVille
 {
     public class CityData 
     {
-        public string str_id = " - ";
-        public string quartier = " - ";
-        public string canton = " - ";
-        public string villette = " - ";
-        public string str_residents = " - ";
-        public string str_employ = " - ";
-        public string str_superf = " - ";
-        public string str_denct = " - ";
+        public string str_id = " ";
+        public string quartier = " ";
+        public string canton = " ";
+        public string villette = " ";
+        public string str_residents = " ";
+        public string str_employ = " ";
+        public string str_superf = " ";
+        public string str_denct = " ";
+        public string str_denstwork = " ";
+        public string str_deputat = " ";
 
-        public string[] maisons = new string[7] { " - ", " - ", " - ", " - ", " - ", " - ", " - " };
+        public string[] maisons = new string[7] { " ", " ", " ", " ", " ", " ", " " };
+        public string[] place = new string[14] { " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " };
         public string[] employe;
 
         int id = 0;
@@ -28,11 +31,13 @@ namespace ParadiseVille
         int culture = 0;
         int hotel = 0;
         int education = 0;
+        int medicine = 0;
         int services = 0;
         int sport = 0;
         int administration = 0;
 
         const float emp_index = 5.5f;
+        const float deputat_district = 500;
 
         public CityData(Mode mode, string code)
         {
@@ -49,6 +54,8 @@ namespace ParadiseVille
             str_employ = employ.ToString();
             str_superf = superficie.ToString();
             str_denct = ((int)(residents / superficie) * 100).ToString();
+            str_denstwork = ((int)((employ + (residents / 2)) / superficie) * 100).ToString();
+            str_deputat = Mathf.RoundToInt((residents + employ) / deputat_district).ToString();
         }
 
         void GetDataQuartier(string code)
@@ -64,7 +71,13 @@ namespace ParadiseVille
                         superficie = 93.3f;
                         maisons[0] = GenMaisonData("Cas", 1, 1, new int[1] { 1 });
                         maisons[1] = GenMaisonData("Boi", 2, 25, new int[1] { 4 });
-                        culture = 1 * 2 + 1 * 22;
+                        culture = 1 * 22;
+                        administration = 1 * 2;
+                        place[0] = "Château de Paradis";
+                        place[1] = "Synédroin";
+                        place[2] = "Bois de Paradis";
+                        place[3] = "Synagogue de Bois";
+                        place[4] = "place de Boisé";
                         break;
                     }
                 case "00FF31":
@@ -83,6 +96,20 @@ namespace ParadiseVille
                         trade = 2 * 6;
                         hotel = 3 * 6 + 1 * 4;
                         culture = 3 * 3;
+                        place[0] = "Château de Ciel";
+                        place[1] = "Marché du Château";
+                        place[2] = "Auberge exclusive";
+                        place[3] = "Synagogue de la création";
+                        place[4] = "Hôtel du Château";
+                        place[5] = "Synagogue de Roi";
+                        place[6] = "Maison de Rabbin";
+                        place[7] = "place du Château";
+                        place[8] = "place de Communautè";
+                        place[9] = "place de Île";
+                        place[10] = "place de Rivemarché";
+                        place[11] = "place des Artisans";
+                        place[12] = "place de Ville haute";
+                        place[13] = "place de Ville bas";
                         break;
                     }
                 case "0BC373":
@@ -102,6 +129,8 @@ namespace ParadiseVille
                         culture = 1 * 3;
                         hotel = 4 * 4;
                         education = 1 * 6;
+                        place[0] = "Synagogue de la Petit fleur";
+                        place[1] = "place de la Terrase";
                         break;
                     }
                 case "46FF00":
@@ -115,6 +144,10 @@ namespace ParadiseVille
                         maisons[1] = GenMaisonData("Bla", 5, 1, new int[3] { 7, 8, 8 });
                         trade = 1 * 6;
                         hotel = 2 * 4;
+                        place[0] = "palais du Governeur";
+                        place[1] = "Source de guérison";
+                        place[2] = "place de l'Aube";
+                        place[3] = "place du Lagune";
                         break;
                     }
                 case "FF0000":
@@ -127,6 +160,14 @@ namespace ParadiseVille
                         maisons[0] = GenMaisonData("Rou", 2, 65, new int[4] { 0, 4, 4, 2});
                         culture = 1 * 3;
                         administration = 1 * 9;
+                        place[0] = "Hôtel de Ville";
+                        place[1] = "Grand porte du Paradise";
+                        place[2] = "Synagogue de la Joie";
+                        place[3] = "Boulevard du Fleurs";
+                        place[4] = "place du Cœure";
+                        place[5] = "place de Porte";
+                        place[6] = "place de Vie";
+                        place[7] = "place piémont";
                         break;
                     }
                 case "FF7F91":
@@ -139,6 +180,11 @@ namespace ParadiseVille
                         maisons[0] = GenMaisonData("Rou", 2, 64, new int[4] { 0, 4, 4, 2 });
                         trade = 1 * 6;
                         hotel = 1 * 4;
+                        place[0] = "Palais de la famille";
+                        place[1] = "Parc familial";
+                        place[2] = "Quai céleste";
+                        place[3] = "Boulevard des Saints";
+                        place[4] = "Place du nouvelle marché";
                         break;
                     }
                 case "EC2745":
@@ -151,6 +197,11 @@ namespace ParadiseVille
                         maisons[0] = GenMaisonData("Rou", 2, 41, new int[4] { 0, 4, 4, 2 });
                         office = 1 * 4;
                         education = 1 * 6;
+                        place[0] = "Synagogue de Bonheur";
+                        place[1] = "Boulevard d'Amour";
+                        place[2] = "Banque près de la Synagogue";
+                        place[3] = "place de la Synagogue";
+                        place[4] = "place d'Honneur";
                         break;
                     }
                 case "6328E7":
@@ -160,9 +211,13 @@ namespace ParadiseVille
                         canton = "Gloir";
                         villette = "Fleurville";
                         superficie = 20.3f;
-                        maisons[0] = GenMaisonData("Coi", 2, 44, new int[6] { 4, 4, 4, 4, 4, 2 });
-                        maisons[1] = GenMaisonData("Faç", 2, 52, new int[6] { 4, 5, 5, 5, 5, 2 });
+                        maisons[0] = GenMaisonData("Coi", 2, 25, new int[6] { 4, 4, 4, 4, 4, 2 });
+                        maisons[1] = GenMaisonData("Faç", 2, 32, new int[6] { 4, 5, 5, 5, 5, 2 });
                         trade = 2 * 7;
+                        place[0] = "Halles de Ville";
+                        place[1] = "Marché du luxe";
+                        place[2] = "parc de Soleil";
+                        place[3] = "place de Marché";
                         break;
                     }
                 case "9A82F4":
@@ -181,11 +236,24 @@ namespace ParadiseVille
                         canton = "Gloir";
                         villette = "Fleurville";
                         superficie = 9.3f;
-                        office = 28 * 6 + 1 * 2 + 11 * 4;
+                        office = 27 * 6 + 1 * 2 + 11 * 4;
                         culture = 3 * 8;
                         trade = 1 * 2 + 1 * 6;
                         hotel = 2 * 4;
-                        services = 1 * 8 + 1 * 6 + 1 * 11 + 1 * 10;
+                        medicine = 1 * 11 + 1 * 10 + 1 * 6;
+                        services = 1 * 8;
+                        administration = 1 * 6;
+                        place[0] = "lac Royal";
+                        place[1] = "Gouvernance de Jardin";
+                        place[2] = "Hôpital de Fleurville";
+                        place[3] = "Cental post de Ville";
+                        place[4] = "Boulevard Royal";
+                        place[5] = "Passage de Ville";
+                        place[6] = "Maison de parfum et des huiles";
+                        place[7] = "Synagogue de Promenade";
+                        place[8] = "place de Passage";
+                        place[9] = "place Royal";
+                        place[10] = "place de la Post";
                         break;
                     }
                 case "6FF921":
@@ -197,10 +265,16 @@ namespace ParadiseVille
                         superficie = 18.6f;
                         maisons[0] = GenMaisonData("Coi", 2, 28, new int[6] { 4, 4, 4, 4, 4, 2 });
                         maisons[1] = GenMaisonData("Faç", 2, 22, new int[6] { 4, 5, 5, 5, 5, 2 });
-                        office = 1 * 4;
                         culture = 1 * 3 + 1 * 12;
                         hotel = 6 * 4 + 1 * 6;
-                        administration = 1 * 9;
+                        administration = 1 * 9 + 1 * 4;
+                        place[0] = "Grand Hôtel de Ville";
+                        place[1] = "Public conseil de Ville";
+                        place[2] = "Club de Philosophie";
+                        place[3] = "Departament de Nature";
+                        place[4] = "Boulevard de Théâtre";
+                        place[5] = "Quai de Roses";
+                        place[6] = "place de Roi";
                         break;
                     }
                 case "CAFD39":
@@ -216,7 +290,15 @@ namespace ParadiseVille
                         culture = 1 * 14;
                         education = 1 * 6 + 1 * 7;
                         sport = 1 * 8;
-                        administration = 1 * 15 + 1 * 36 + 1 * 7;
+                        administration = 1 * 15 + 1 * 36 + 1 * 9;
+                        place[0] = "Fleurville Hôtel";
+                        place[1] = "Departament de Développement";
+                        place[2] = "Conseil du Royaume";
+                        place[3] = "parc de Fluerville";
+                        place[4] = "Grand Théâter de Ville";
+                        place[5] = "Stade de Fleurville";
+                        place[6] = "Bibliothèque de Fleurville";
+                        place[7] = "place de Théâter";
                         break;
                     }
                 case "EA9B39":
@@ -229,7 +311,11 @@ namespace ParadiseVille
                         maisons[0] = GenMaisonData("Coi", 2, 24, new int[6] { 4, 4, 4, 4, 4, 2 });
                         maisons[1] = GenMaisonData("Faç", 2, 24, new int[6] { 4, 5, 5, 5, 5, 2 });
                         education = 1 * 15;
+                        place[0] = "Lycée de Vlle";
+                        place[1] = "Parc de Lycée";
                         break;
+                        // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                        // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
                     }
                 case "F7C329":
                     {
@@ -278,7 +364,7 @@ namespace ParadiseVille
 
         string[] WorkersSet()
         {
-            byte cnt = 9;
+            byte cnt = 10;
             int[] dat = new int[cnt];
             string[] arr = new string[cnt];
 
@@ -288,9 +374,10 @@ namespace ParadiseVille
             dat[3] = (int)(culture * emp_index);
             dat[4] = (int)(hotel * emp_index);
             dat[5] = (int)(education * emp_index);
-            dat[6] = (int)(services * emp_index);
-            dat[7] = (int)(sport * emp_index);
-            dat[8] = (int)(administration * emp_index);
+            dat[6] = (int)(medicine * emp_index);
+            dat[7] = (int)(services * emp_index);
+            dat[8] = (int)(sport * emp_index);
+            dat[9] = (int)(administration * emp_index);
 
             for (byte i = 0; i < cnt; i++)
             {
