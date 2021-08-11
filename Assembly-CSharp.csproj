@@ -59,10 +59,14 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\DataHandler.cs" />
     <Compile Include="Assets\Scripts\CityData.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\TextDraw.cs" />
+    <Compile Include="Assets\Scripts\StaticData.cs" />
     <Compile Include="Assets\Scripts\GameMap.cs" />
+    <Compile Include="Assets\Scripts\ButtonPanel.cs" />
+    <Compile Include="Assets\Scripts\ButtonGame.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

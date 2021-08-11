@@ -2,12 +2,11 @@ using UnityEngine;
 
 namespace ParadiseVille
 {
+    /// <summary>
+    /// Game map
+    /// </summary>
     class GameMap : ISprite, ITexture
     {
-        // ***
-        // Игровая карта
-        // ***
-
         GameObject objMap;
         float objMapPositionX;
         float objMapPositionY;
@@ -18,18 +17,30 @@ namespace ParadiseVille
         int objTextureWidth;
         int objTextureHeight;
 
-        ~ GameMap()
+        public void ObjectReset()
         {
-            if (objMap != null) Object.Destroy(objMap);
+            if (objMap != null)
+            {
+                Object.Destroy(objMap);
+            }
+
+            if (objTexture != null)
+            {
+                Object.Destroy(objTexture);
+            }
         }
 
-        public GameObject ObjectSpriteCreate(float xpos, float ypos, string source)
+        public GameObject ObjectSpriteCreate(float xpos, float ypos, string source, int order)
         {
             if (objMap != null) Object.Destroy(objMap);
 
             objMap = new GameObject("objMap");
+
             objMap.transform.position = new Vector3(xpos, ypos);
-            objMap.AddComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(source);
+
+            SpriteRenderer spriteRenderer = objMap.AddComponent<SpriteRenderer>();
+            spriteRenderer.sprite = Resources.Load<Sprite>(source);
+            spriteRenderer.sortingOrder = order;
 
             objMapPositionX = xpos;
             objMapPositionY = ypos;
@@ -123,18 +134,17 @@ namespace ParadiseVille
         {
             if (objTexture != null)
             {
-                int width = objTexture.width;
-                int height = objTexture.height;
                 int pixels = 0;
 
-                for (int i = 0; i < width; i++)
+                for (int i = 0; i < objTextureWidth; i++)
                 {
-                    for (int j = 0; j < height; j++)
+                    for (int j = 0; j < objTextureHeight; j++)
                     {
                         if (GetTexturePixel(ref i, ref j) == hexColor) pixels++;
                     }
                 }
 
+                Debug.Log("TEXTURE " + objTextureWidth.ToString() + " / " + objTextureHeight.ToString() + " = " + pixels.ToString());
                 return pixels;
             }
             else

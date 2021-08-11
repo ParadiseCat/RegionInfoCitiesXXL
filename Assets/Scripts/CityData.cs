@@ -1,391 +1,644 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace ParadiseVille
 {
-    public class CityData 
+    /// <summary>
+    /// Data of city disctricts
+    /// </summary>
+    public static class DataVille
     {
-        public string str_id = " ";
-        public string quartier = " ";
-        public string canton = " ";
-        public string villette = " ";
-        public string str_residents = " ";
-        public string str_employ = " ";
-        public string str_superf = " ";
-        public string str_denct = " ";
-        public string str_denstwork = " ";
-        public string str_deputat = " ";
-
-        public string[] maisons = new string[7] { " ", " ", " ", " ", " ", " ", " " };
-        public string[] place = new string[14] { " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " };
-        public string[] employe;
-
-        int id = 0;
-        int employ = 0;
-        int id_res = 0;
-        int residents = 0;
-        float superficie = 0;
-
-        int production = 0;
-        int office = 0;
-        int trade = 0;
-        int culture = 0;
-        int hotel = 0;
-        int education = 0;
-        int medicine = 0;
-        int services = 0;
-        int sport = 0;
-        int administration = 0;
-
-        const float emp_index = 5.5f;
-        const float deputat_district = 500;
-
-        public CityData(Mode mode, string code)
+        public static DistrictData Information(Ville quartier)
         {
-            switch (mode)
+            DistrictData dat;
+
+            switch (quartier)
             {
-                case Mode.Quartier: GetDataQuartier(code); break;
-                case Mode.Canton: GetDataCanton(code); break;
-                case Mode.Ville: GetDataVille(code); break;
-            }
-
-            employe = WorkersSet();
-            str_id = id.ToString();
-            str_residents = residents.ToString();
-            str_employ = employ.ToString();
-            str_superf = superficie.ToString();
-            str_denct = ((int)(residents / superficie) * 100).ToString();
-            str_denstwork = ((int)((employ + (residents / 2)) / superficie) * 100).ToString();
-            str_deputat = Mathf.RoundToInt((residents + employ) / deputat_district).ToString();
-        }
-
-        void GetDataQuartier(string code)
-        {
-            switch (code)
-            {
-                case "B5FF00":
-                    {
-                        id = 111;
-                        quartier = "JARDINFLEURI";
-                        canton = "Montfleur";
-                        villette = "Fleurville";
-                        superficie = 93.3f;
-                        maisons[0] = GenMaisonData("Cas", 1, 1, new int[1] { 1 });
-                        maisons[1] = GenMaisonData("Boi", 2, 25, new int[1] { 4 });
-                        culture = 1 * 22;
-                        administration = 1 * 2;
-                        place[0] = "Château de Paradis";
-                        place[1] = "Synédroin";
-                        place[2] = "Bois de Paradis";
-                        place[3] = "Synagogue de Bois";
-                        place[4] = "place de Boisé";
-                        break;
-                    }
-                case "00FF31":
-                    {
-                        id = 112;
-                        quartier = "ÎLECHÂTEAU";
-                        canton = "Montfleur";
-                        villette = "Fleurville";
-                        superficie = 24.8f;
-                        maisons[0] = GenMaisonData("Blu", 2, 14, new int[4] { 5, 5, 5, 3 });
-                        maisons[1] = GenMaisonData("Arg", 2, 8, new int[3] { 2, 3, 3 });
-                        maisons[2] = GenMaisonData("Rou", 2, 12, new int[3] { 2, 2, 3 });
-                        maisons[3] = GenMaisonData("Jeu", 2, 6, new int[2] { 5, 5 });
-                        maisons[4] = GenMaisonData("Anc", 2, 10, new int[3] { 0, 2, 2 });
-                        maisons[5] = GenMaisonData("Boi", 2, 9, new int[3] { 5, 5, 5 });
-                        trade = 2 * 6;
-                        hotel = 3 * 6 + 1 * 4;
-                        culture = 3 * 3;
-                        place[0] = "Château de Ciel";
-                        place[1] = "Marché du Château";
-                        place[2] = "Auberge exclusive";
-                        place[3] = "Synagogue de la création";
-                        place[4] = "Hôtel du Château";
-                        place[5] = "Synagogue de Roi";
-                        place[6] = "Maison de Rabbin";
-                        place[7] = "place du Château";
-                        place[8] = "place de Communautè";
-                        place[9] = "place de Île";
-                        place[10] = "place de Rivemarché";
-                        place[11] = "place des Artisans";
-                        place[12] = "place de Ville haute";
-                        place[13] = "place de Ville bas";
-                        break;
-                    }
-                case "0BC373":
-                    {
-                        id = 113;
-                        quartier = "ROIFRÊNAIE";
-                        canton = "Montfleur";
-                        villette = "Fleurville";
-                        superficie = 10.8f;
-                        maisons[0] = GenMaisonData("Ora", 1, 6, new int[4] { 2, 2, 2, 2 });
-                        maisons[1] = GenMaisonData("Jeu", 1, 7, new int[4] { 0, 5, 5, 5 });
-                        maisons[2] = GenMaisonData("Blu", 1, 5, new int[3] { 0, 2, 1 });
-                        maisons[3] = GenMaisonData("Vil", 1, 1, new int[2] { 2, 0 });
-                        maisons[4] = GenMaisonData("Gri", 1, 3, new int[2] { 3, 0 });
-                        maisons[5] = GenMaisonData("Rou", 1, 4, new int[2] { 3, 0 });
-                        maisons[6] = GenMaisonData("Cer", 1, 1, new int[2] { 1, 0 });
-                        culture = 1 * 3;
-                        hotel = 4 * 4;
-                        education = 1 * 6;
-                        place[0] = "Synagogue de la Petit fleur";
-                        place[1] = "place de la Terrase";
-                        break;
-                    }
-                case "46FF00":
-                    {
-                        id = 114;
-                        quartier = "CÔTELEVANT";
-                        canton = "Montfleur";
-                        villette = "Fleurville";
-                        superficie = 14.3f;
-                        maisons[0] = GenMaisonData("Rou", 2, 81, new int[3] { 0, 5, 4 });
-                        maisons[1] = GenMaisonData("Bla", 5, 1, new int[3] { 7, 8, 8 });
-                        trade = 1 * 6;
-                        hotel = 2 * 4;
-                        place[0] = "palais du Governeur";
-                        place[1] = "Source de guérison";
-                        place[2] = "place de l'Aube";
-                        place[3] = "place du Lagune";
-                        break;
-                    }
-                case "FF0000":
-                    {
-                        id = 121;
-                        quartier = "HÔTEL";
-                        canton = "Cœurville";
-                        villette = "Fleurville";
-                        superficie = 13.6f;
-                        maisons[0] = GenMaisonData("Rou", 2, 65, new int[4] { 0, 4, 4, 2});
-                        culture = 1 * 3;
-                        administration = 1 * 9;
-                        place[0] = "Hôtel de Ville";
-                        place[1] = "Grand porte du Paradise";
-                        place[2] = "Synagogue de la Joie";
-                        place[3] = "Boulevard du Fleurs";
-                        place[4] = "place du Cœure";
-                        place[5] = "place de Porte";
-                        place[6] = "place de Vie";
-                        place[7] = "place piémont";
-                        break;
-                    }
-                case "FF7F91":
-                    {
-                        id = 122;
-                        quartier = "RIVECIEL";
-                        canton = "Cœurville";
-                        villette = "Fleurville";
-                        superficie = 8.9f;
-                        maisons[0] = GenMaisonData("Rou", 2, 64, new int[4] { 0, 4, 4, 2 });
-                        trade = 1 * 6;
-                        hotel = 1 * 4;
-                        place[0] = "Palais de la famille";
-                        place[1] = "Parc familial";
-                        place[2] = "Quai céleste";
-                        place[3] = "Boulevard des Saints";
-                        place[4] = "Place du nouvelle marché";
-                        break;
-                    }
-                case "EC2745":
-                    {
-                        id = 123;
-                        quartier = "ÉCLAIRÉS";
-                        canton = "Cœurville";
-                        villette = "Fleurville";
-                        superficie = 7.2f;
-                        maisons[0] = GenMaisonData("Rou", 2, 41, new int[4] { 0, 4, 4, 2 });
-                        office = 1 * 4;
-                        education = 1 * 6;
-                        place[0] = "Synagogue de Bonheur";
-                        place[1] = "Boulevard d'Amour";
-                        place[2] = "Banque près de la Synagogue";
-                        place[3] = "place de la Synagogue";
-                        place[4] = "place d'Honneur";
-                        break;
-                    }
-                case "6328E7":
-                    {
-                        id = 131;
-                        quartier = "HALLESLUXE";
-                        canton = "Gloir";
-                        villette = "Fleurville";
-                        superficie = 20.3f;
-                        maisons[0] = GenMaisonData("Coi", 2, 25, new int[6] { 4, 4, 4, 4, 4, 2 });
-                        maisons[1] = GenMaisonData("Faç", 2, 32, new int[6] { 4, 5, 5, 5, 5, 2 });
-                        trade = 2 * 7;
-                        place[0] = "Halles de Ville";
-                        place[1] = "Marché du luxe";
-                        place[2] = "parc de Soleil";
-                        place[3] = "place de Marché";
-                        break;
-                    }
-                case "9A82F4":
-                    {
-                        id = 132;
-                        quartier = "AQUARELLE";
-                        canton = "Gloir";
-                        villette = "Fleurville";
-                        superficie = 25.2f;
-                        break;
-                    }
-                case "AA0CF4":
-                    {
-                        id = 133;
-                        quartier = "PROMENADE";
-                        canton = "Gloir";
-                        villette = "Fleurville";
-                        superficie = 9.3f;
-                        office = 27 * 6 + 1 * 2 + 11 * 4;
-                        culture = 3 * 8;
-                        trade = 1 * 2 + 1 * 6;
-                        hotel = 2 * 4;
-                        medicine = 1 * 11 + 1 * 10 + 1 * 6;
-                        services = 1 * 8;
-                        administration = 1 * 6;
-                        place[0] = "lac Royal";
-                        place[1] = "Gouvernance de Jardin";
-                        place[2] = "Hôpital de Fleurville";
-                        place[3] = "Cental post de Ville";
-                        place[4] = "Boulevard Royal";
-                        place[5] = "Passage de Ville";
-                        place[6] = "Maison de parfum et des huiles";
-                        place[7] = "Synagogue de Promenade";
-                        place[8] = "place de Passage";
-                        place[9] = "place Royal";
-                        place[10] = "place de la Post";
-                        break;
-                    }
-                case "6FF921":
-                    {
-                        id = 141;
-                        quartier = "IDYLLE";
-                        canton = "Impérial";
-                        villette = "Fleurville";
-                        superficie = 18.6f;
-                        maisons[0] = GenMaisonData("Coi", 2, 28, new int[6] { 4, 4, 4, 4, 4, 2 });
-                        maisons[1] = GenMaisonData("Faç", 2, 22, new int[6] { 4, 5, 5, 5, 5, 2 });
-                        culture = 1 * 3 + 1 * 12;
-                        hotel = 6 * 4 + 1 * 6;
-                        administration = 1 * 9 + 1 * 4;
-                        place[0] = "Grand Hôtel de Ville";
-                        place[1] = "Public conseil de Ville";
-                        place[2] = "Club de Philosophie";
-                        place[3] = "Departament de Nature";
-                        place[4] = "Boulevard de Théâtre";
-                        place[5] = "Quai de Roses";
-                        place[6] = "place de Roi";
-                        break;
-                    }
-                case "CAFD39":
-                    {
-                        id = 142;
-                        quartier = "ANTHÈSE";
-                        canton = "Impérial";
-                        villette = "Fleurville";
-                        superficie = 13.9f;
-                        maisons[0] = GenMaisonData("Coi", 2, 12, new int[6] { 4, 4, 4, 4, 4, 2 });
-                        maisons[1] = GenMaisonData("Tri", 5,  8, new int[5] { 0, 16, 16, 16, 16 });
-                        office = 1 * 2 + 6 * 4;
-                        culture = 1 * 14;
-                        education = 1 * 6 + 1 * 7;
-                        sport = 1 * 8;
-                        administration = 1 * 15 + 1 * 36 + 1 * 9;
-                        place[0] = "Fleurville Hôtel";
-                        place[1] = "Departament de Développement";
-                        place[2] = "Conseil du Royaume";
-                        place[3] = "parc de Fluerville";
-                        place[4] = "Grand Théâter de Ville";
-                        place[5] = "Stade de Fleurville";
-                        place[6] = "Bibliothèque de Fleurville";
-                        place[7] = "place de Théâter";
-                        break;
-                    }
-                case "EA9B39":
-                    {
-                        id = 151;
-                        quartier = "PERPÉTUEL";
-                        canton = "Promission";
-                        villette = "Fleurville";
-                        superficie = 12.8f;
-                        maisons[0] = GenMaisonData("Coi", 2, 24, new int[6] { 4, 4, 4, 4, 4, 2 });
-                        maisons[1] = GenMaisonData("Faç", 2, 24, new int[6] { 4, 5, 5, 5, 5, 2 });
-                        education = 1 * 15;
-                        place[0] = "Lycée de Vlle";
-                        place[1] = "Parc de Lycée";
-                        break;
-                        // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
-                        // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
-                    }
-                case "F7C329":
-                    {
-                        id = 152;
-                        quartier = "SABBAT";
-                        canton = "Promission";
-                        villette = "Fleurville";
-                        superficie = 38.6f;
-                        break;
-                    }
-
+                case Ville.q_Jardinfleuri: {
+                    dat = new DistrictData("JARDINFLEURI", "Montfleur", "Fleurville", 91.9f);
+                    dat.HomeDataAdd("Cas", SocialState.Responsible, 1, 1, new int[1] { 1 });
+                    dat.HomeDataAdd("Boi", SocialState.Specialist, 2, 25, new int[1] { 4 });
+                    dat.EmployersDataAdd(EmployerType.Culture, 1 * 22);
+                    dat.EmployersDataAdd(EmployerType.Administration, 1 * 2);
+                    dat.PlaceDataAdd("Château de Paradis", "Synédroin", "Synagogue de Bois");
+                    dat.PlaceDataAdd("place de Boisé");
+                    dat.PlaceDataAdd("Bois de Paradis");
+                    return dat;
+                }
+                case Ville.q_Ilechateau: {
+                    dat = new DistrictData("ÎLECHÂTEAU", "Montfleur", "Fleurville", 24.5f);
+                    dat.HomeDataAdd("Blu", SocialState.Specialist, 2, 14, new int[4] { 5, 5, 5, 3 });
+                    dat.HomeDataAdd("Arg", SocialState.Specialist, 2, 8, new int[3] { 2, 3, 3 });
+                    dat.HomeDataAdd("Rou", SocialState.Specialist, 2, 12, new int[3] { 2, 2, 3 });
+                    dat.HomeDataAdd("Jeu", SocialState.Specialist, 2, 6, new int[2] { 5, 5 });
+                    dat.HomeDataAdd("Anc", SocialState.Specialist, 2, 10, new int[3] { 0, 2, 2 });
+                    dat.HomeDataAdd("Boi", SocialState.Specialist, 2, 9, new int[3] { 5, 5, 5 });
+                    dat.EmployersDataAdd(EmployerType.Culture, 3 * 3);
+                    dat.EmployersDataAdd(EmployerType.Hotel, 3 * 6 + 1 * 4);
+                    dat.EmployersDataAdd(EmployerType.Trade, 2 * 6);
+                    dat.PlaceDataAdd("Château de Ciel", "Marché du Château", "Auberge exclusive", "Synagogue de la création",
+                                     "Hôtel du Château", "Synagogue de Roi", "Maison de Rabbin");
+                    dat.PlaceDataAdd("place du Château", "place de Communautè", "place de Île", "place de Rivemarché",
+                                     "place des Artisans", "place de Ville haute", "place de Ville bas");
+                    return dat;
+                }
+                case Ville.q_Roifrenaie: {
+                    dat = new DistrictData("ROIFRÊNAIE", "Montfleur", "Fleurville", 10.8f);
+                    dat.HomeDataAdd("Ora", SocialState.Responsible, 1, 6, new int[4] { 2, 2, 2, 2 });
+                    dat.HomeDataAdd("Jeu", SocialState.Responsible, 1, 7, new int[4] { 0, 5, 5, 5 });
+                    dat.HomeDataAdd("Blu", SocialState.Responsible, 1, 5, new int[3] { 0, 2, 1 });
+                    dat.HomeDataAdd("Vil", SocialState.Responsible, 1, 1, new int[2] { 2, 0 });
+                    dat.HomeDataAdd("Gri", SocialState.Responsible, 1, 3, new int[2] { 3, 0 });
+                    dat.HomeDataAdd("Rou", SocialState.Responsible, 1, 4, new int[2] { 3, 0 });
+                    dat.HomeDataAdd("Cer", SocialState.Responsible, 1, 1, new int[2] { 1, 0 });
+                    dat.EmployersDataAdd(EmployerType.Culture, 1 * 3);
+                    dat.EmployersDataAdd(EmployerType.Education, 1 * 6);
+                    dat.EmployersDataAdd(EmployerType.Hotel, 4 * 4);
+                    dat.PlaceDataAdd("Synagogue de la Petit fleur");
+                    dat.PlaceDataAdd("place de la Terrase");
+                    return dat;
+                }
+                case Ville.q_Cotelevant: {
+                    dat = new DistrictData("CÔTELEVANT", "Montfleur", "Fleurville", 14.2f);
+                    dat.HomeDataAdd("Rou", SocialState.Professional, 2, 81, new int[3] { 0, 5, 4 });
+                    dat.HomeDataAdd("Bla", SocialState.Responsible, 5, 1, new int[3] { 7, 8, 8 });
+                    dat.EmployersDataAdd(EmployerType.Hotel, 1 * 6);
+                    dat.EmployersDataAdd(EmployerType.Trade, 2 * 4);
+                    dat.PlaceDataAdd("palais du Governeur", "Source de guérison");
+                    dat.PlaceDataAdd("place de l'Aube", "place du Lagune");
+                    dat.PlaceDataAdd("parc de Governeur");
+                    return dat;
+                }
+                case Ville.q_Hotel: {
+                    dat = new DistrictData("HÔTEL", "Cœurville", "Fleurville", 13.5f);
+                    dat.HomeDataAdd("Rou", SocialState.Specialist, 2, 65, new int[4] { 0, 4, 4, 2 });
+                    dat.EmployersDataAdd(EmployerType.Administration, 1 * 9);
+                    dat.EmployersDataAdd(EmployerType.Culture, 1 * 3);
+                    dat.PlaceDataAdd("Hôtel de Ville", "Grand porte du Paradise", "Synagogue de la Joie", "Boulevard du Fleurs");
+                    dat.PlaceDataAdd("place du Cœure", "place de Porte", "place de Vie", "place Piémont");
+                    return dat;
+                }
+                case Ville.q_Riveciel: {
+                    dat = new DistrictData("RIVECIEL", "Cœurville", "Fleurville", 10.4f);
+                    dat.HomeDataAdd("Rou", SocialState.Specialist, 2, 65, new int[4] { 0, 4, 4, 2 });
+                    dat.EmployersDataAdd(EmployerType.Hotel, 1 * 4);
+                    dat.EmployersDataAdd(EmployerType.Trade, 1 * 6);
+                    dat.PlaceDataAdd("Palais de la famille", "Quai céleste", "Boulevard des Saints");
+                    dat.PlaceDataAdd("place du Nouvelle marché");
+                    dat.PlaceDataAdd("parc Familial");
+                    return dat;
+                }
+                case Ville.q_Eclaires: {
+                    dat = new DistrictData("ÉCLAIRÉS", "Cœurville", "Fleurville", 7.2f);
+                    dat.HomeDataAdd("Rou", SocialState.Specialist, 2, 65, new int[4] { 0, 4, 4, 2 });
+                    dat.EmployersDataAdd(EmployerType.Education, 1 * 6);
+                    dat.EmployersDataAdd(EmployerType.Office, 1 * 4);
+                    dat.PlaceDataAdd("Synagogue de Bonheur", "Boulevard d'Amour", "Banque près de la Synagogue");
+                    dat.PlaceDataAdd("place de la Synagogue", "place d'Honneur");
+                    return dat;
+                }
+                case Ville.q_Hallesluxe: {
+                    dat = new DistrictData("HALLESLUXE", "Gloir", "Fleurville", 17.2f);
+                    dat.HomeDataAdd("Coi", SocialState.Responsible, 2, 25, new int[6] { 4, 4, 4, 4, 4, 2 });
+                    dat.HomeDataAdd("Faç", SocialState.Professional, 2, 32, new int[6] { 4, 5, 5, 5, 5, 2 });
+                    dat.EmployersDataAdd(EmployerType.Trade, 2 * 7);
+                    dat.PlaceDataAdd("Halles de Ville", "Marché du Luxe");
+                    dat.PlaceDataAdd("place de Marché");
+                    dat.PlaceDataAdd("parc de Soleil");
+                    return dat;
+                }
+                case Ville.q_Aquarelle: {
+                    dat = new DistrictData("AQUARELLE", "Gloir", "Fleurville", 27.0f);
+                    dat.HomeDataAdd("---", SocialState.Responsible, 2, 50, new int[1] { 10 });
+                    return dat;
                     // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
                     // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Promenade: {
+                    dat = new DistrictData("PROMENADE", "Gloir", "Fleurville", 11.0f);
+                    dat.EmployersDataAdd(EmployerType.Administration, 1 * 6);
+                    dat.EmployersDataAdd(EmployerType.Culture, 3 * 8);
+                    dat.EmployersDataAdd(EmployerType.Hotel, 2 * 4);
+                    dat.EmployersDataAdd(EmployerType.Medicine, 1 * 11 + 1 * 10 + 1 * 6);
+                    dat.EmployersDataAdd(EmployerType.Office, 27 * 6 + 11 * 4);
+                    dat.EmployersDataAdd(EmployerType.Services, 1 * 8);
+                    dat.EmployersDataAdd(EmployerType.Trade, 1 * 6 + 2 * 2);
+                    dat.PlaceDataAdd("Gouvernance de Jardin", "Hôpital de Fleurville", "Boulevard Royal", "Synagogue de Promenade",
+                                     "Cental post de Ville", "Passage de Ville", "Maison de parfum et des huiles");
+                    dat.PlaceDataAdd("place de Passage", "place Royal", "place de la Post");
+                    dat.PlaceDataAdd("parc du Lac Royal");
+                    return dat;
+                }
+                case Ville.q_Idylle: {
+                    dat = new DistrictData("IDYLLE", "Impérial", "Fleurville", 18.2f);
+                    dat.HomeDataAdd("Coi", SocialState.Responsible, 2, 25, new int[6] { 4, 4, 4, 4, 4, 2 });
+                    dat.HomeDataAdd("Faç", SocialState.Professional, 2, 32, new int[6] { 4, 5, 5, 5, 5, 2 });
+                    dat.EmployersDataAdd(EmployerType.Administration, 1 * 9 + 1 * 4);
+                    dat.EmployersDataAdd(EmployerType.Culture, 1 * 3 + 1 * 12);
+                    dat.EmployersDataAdd(EmployerType.Hotel, 1 * 6 + 6 * 4);
+                    dat.PlaceDataAdd("Grand Hôtel de Ville", "Public conseil de Ville", "Club de Philosophie", "Quai de Roses",
+                                     "Departament de Nature", "Boulevard de Théâtre");
+                    dat.PlaceDataAdd("place de Roi");
+                    return dat;
+                }
+                case Ville.q_Anthese: {
+                    dat = new DistrictData("ANTHÈSE", "Impérial", "Fleurville", 13.9f);
+                    dat.HomeDataAdd("Coi", SocialState.Responsible, 2, 25, new int[6] { 4, 4, 4, 4, 4, 2 });
+                    dat.HomeDataAdd("Tri", SocialState.Professional, 5, 8, new int[5] { 0, 16, 16, 16, 16 });
+                    dat.EmployersDataAdd(EmployerType.Administration, 1 * 36 + 1 * 15 + 1 * 9);
+                    dat.EmployersDataAdd(EmployerType.Culture, 1 * 14);
+                    dat.EmployersDataAdd(EmployerType.Education, 1 * 7 + 1 * 6);
+                    dat.EmployersDataAdd(EmployerType.Office, 6 * 4);
+                    dat.EmployersDataAdd(EmployerType.Sport, 1 * 8);
+                    dat.EmployersDataAdd(EmployerType.Trade, 1 * 2);
+                    dat.PlaceDataAdd("Fleurville Hôtel", "Departament de Développement", "Conseil du Royaume",
+                                     "Grand Théâter de Ville", "Stade de Fleurville", "Bibliothèque de Fleurville");
+                    dat.PlaceDataAdd("place de Théâter");
+                    dat.PlaceDataAdd("parc de Fluerville");
+                    return dat;
+                }
+                case Ville.q_Perpetuel: {
+                    dat = new DistrictData("PERPÉTUEL", "Promission", "Fleurville", 17.5f);
+                    dat.HomeDataAdd("Coi", SocialState.Responsible, 2, 25, new int[6] { 4, 4, 4, 4, 4, 2 });
+                    dat.HomeDataAdd("Faç", SocialState.Professional, 2, 32, new int[6] { 4, 5, 5, 5, 5, 2 });
+                    dat.EmployersDataAdd(EmployerType.Education, 1 * 15);
+                    dat.PlaceDataAdd("Lycée de Vlle");
+                    dat.PlaceDataAdd("parc de Lycée");
+                    return dat;
+                }
+                case Ville.q_Sabbat: {
+                    dat = new DistrictData("SABBAT", "Promission", "Fleurville", 36.6f);
+                    dat.HomeDataAdd("---", SocialState.Responsible, 2, 100, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Victoire: {
+                    dat = new DistrictData("VICTOIRE", "Palefroi", "Fleurville", 22.4f);
+                    dat.EmployersDataAdd(EmployerType.Administration, 3 * 15 + 6 * 10 + 1 * 6 + 1 * 4);
+                    dat.EmployersDataAdd(EmployerType.Culture, 1 * 16);
+                    dat.EmployersDataAdd(EmployerType.Education, 1 * 15);
+                    dat.EmployersDataAdd(EmployerType.Hotel, 1 * 28 + 1 * 16 + 3 * 10 + 3 * 6 + 1 * 4);
+                    dat.EmployersDataAdd(EmployerType.Office, 13 * 6 + 4 * 4);
+                    dat.EmployersDataAdd(EmployerType.Trade, 1 * 10 + 1 * 7 + 1 * 2);
+                    dat.PlaceDataAdd("Premium Lux Hôtel", "Hôtel de Monde Perpétuel", "Centre d'affaires de Paradise",
+                                     "Hôtel Royal", "Centre culturel du Royaume", "Royaumetour",
+                                     "Dép-t d'économie", "Dép-t des transports", "Dép-t de l'eau et des ressources",
+                                     "Dép-t des arts", "Dép-t d'éducation", "Dép-t de haute technologie", "Dép-t de la société",
+                                     "Dép-t de l'environnement", "Dép-t de l'énergie", "Dép-t du commerce");
+                    dat.PlaceDataAdd("place d'Élite", "place de l'Unité", "place de Vitalité", "place de la Victoire");
+                    return dat;
+                }
+                case Ville.q_Lumiere: {
+                    dat = new DistrictData("LUMIÈRE", "Palefroi", "Fleurville", 19.4f);
+                    dat.EmployersDataAdd(EmployerType.Culture, 1 * 11 + 1 * 9 + 1 * 8 + 1 * 3 + 1 * 2);
+                    dat.EmployersDataAdd(EmployerType.Education, 1 * 18);
+                    dat.EmployersDataAdd(EmployerType.Hotel, 1 * 6);
+                    dat.EmployersDataAdd(EmployerType.Office, 24 * 6 + 62 * 4 + 1 * 2);
+                    dat.EmployersDataAdd(EmployerType.Trade, 1 * 2);
+                    dat.PlaceDataAdd("Musée de la ville", "Musée d'Art", "Institut de la Société", "Monument à l'Harmonie",
+                                     "CC Panorama", "Home cinéma");
+                    dat.PlaceDataAdd("place de la Paroisse", "place des Arts");
+                    return dat;
+                }
+                case Ville.q_Iris: {
+                    dat = new DistrictData("IRIS", "Palefroi", "Fleurville", 33.9f);
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Sophora: {
+                    dat = new DistrictData("SOPHORA", "Palefroi", "Fleurville", 10.1f);
+                    dat.EmployersDataAdd(EmployerType.Culture, 1 * 1);
+                    dat.EmployersDataAdd(EmployerType.Education, 1 * 18);
+                    dat.EmployersDataAdd(EmployerType.Hotel, 2 * 6 + 1 * 4);
+                    dat.EmployersDataAdd(EmployerType.Office, 7 * 6 + 20 * 4);
+                    dat.EmployersDataAdd(EmployerType.Services, 2 * 5);
+                    dat.EmployersDataAdd(EmployerType.Sport, 1 * 10 + 1 * 4);
+                    dat.EmployersDataAdd(EmployerType.Trade, 2 * 7 + 2 * 6);
+                    dat.PlaceDataAdd("Institut de Liaison", "Gare routière Centrale", "Salle de concert Sophora");
+                    dat.PlaceDataAdd("place des Concerts");
+                    dat.PlaceDataAdd("parc Heureux");
+                    return dat;
+                }
+                case Ville.q_Charme: {
+                    dat = new DistrictData("CHARME", "Soleil", "Côtierville", 17.4f);
+                    dat.HomeDataAdd("---", SocialState.Professional, 2, 75, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Cotecorail: {
+                    dat = new DistrictData("CÔTECORAIL", "Soleil", "Côtierville", 15.0f);
+                    dat.HomeDataAdd("---", SocialState.Responsible, 2, 75, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Artisan: {
+                    dat = new DistrictData("ARTISAN", "Soleil", "Côtierville", 36.0f);
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Chandelle: {
+                    dat = new DistrictData("CHANDELLE", "Couleur", "Côtierville", 24.3f);
+                    dat.HomeDataAdd("---", SocialState.Specialist, 2, 75, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Parfumeur: {
+                    dat = new DistrictData("PARFUMEUR", "Couleur", "Côtierville", 11.3f);
+                    dat.HomeDataAdd("---", SocialState.Worker, 2, 50, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Gremil: {
+                    dat = new DistrictData("GRÉMIL", "Couleur", "Côtierville", 18.3f);
+                    dat.HomeDataAdd("---", SocialState.Worker, 2, 50, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Hulotte: {
+                    dat = new DistrictData("HULOTTE", "Couleur", "Côtierville", 98.4f);
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Prosperite:  {
+                    dat = new DistrictData("PROSPÉRITÉ", "Castel", "Côtierville", 21.8f);
+                    dat.HomeDataAdd("---", SocialState.Specialist, 2, 75, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Pastel: {
+                    dat = new DistrictData("PASTEL", "Castel", "Côtierville", 24.4f);
+                    dat.HomeDataAdd("---", SocialState.Specialist, 2, 50, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Sansonnet: {
+                    dat = new DistrictData("SANSONNET", "Castel", "Côtierville", 21.5f);
+                    dat.HomeDataAdd("---", SocialState.Professional, 2, 75, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Cotepalmier: {
+                    dat = new DistrictData("CÔTEPALMIER", "Chaleur", "Côtierville", 46.2f);
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Cotecafe:  {
+                    dat = new DistrictData("CÔTECAFÉ", "Chaleur", "Côtierville", 13.4f);
+                    dat.HomeDataAdd("---", SocialState.Professional, 2, 75, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Brise: {
+                    dat = new DistrictData("BRISE", "Chaleur", "Côtierville", 15.6f);
+                    dat.HomeDataAdd("---", SocialState.Responsible, 2, 75, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Tadorne: {
+                    dat = new DistrictData("TADORNE", "Tropique", "Côtierville", 31.7f);
+                    dat.HomeDataAdd("---", SocialState.Professional, 2, 50, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Cocotier: {
+                    dat = new DistrictData("COCOTIER", "Tropique", "Côtierville", 26.7f);
+                    dat.HomeDataAdd("---", SocialState.Specialist, 2, 100, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Montfee: {
+                    dat = new DistrictData("MONTFÉE", "Tropique", "Côtierville", 203.4f);
+                    dat.HomeDataAdd("---", SocialState.Responsible, 2, 25, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Nichoir: {
+                    dat = new DistrictData("NICHOIR", "Roquerie", "Montville", 96.4f);
+                    dat.HomeDataAdd("---", SocialState.Worker, 2, 50, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Trefleblue: {
+                    dat = new DistrictData("TRÈFLEBLUE", "Roquerie", "Montville", 35.9f);
+                    dat.HomeDataAdd("---", SocialState.Specialist, 2, 50, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Paysage: {
+                    dat = new DistrictData("PAYSAGE", "Ravinlis", "Montville", 22.9f);
+                    dat.HomeDataAdd("---", SocialState.Specialist, 2, 75, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Croissance: {
+                    dat = new DistrictData("CROISSANCE", "Ravinlis", "Montville", 30.5f);
+                    dat.HomeDataAdd("---", SocialState.Professional, 2, 75, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Tilleul: {
+                    dat = new DistrictData("TILLEUL", "Ravinlis", "Montville", 117.3f);
+                    dat.HomeDataAdd("---", SocialState.Worker, 2, 50, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Enchanteur: {
+                    dat = new DistrictData("ENCHANTEUR", "Liberté", "Montville", 36.6f);
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Sublimite: {
+                    dat = new DistrictData("SUBLIMITÉ", "Liberté", "Montville", 35.6f);
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Tulipier: {
+                    dat = new DistrictData("TULIPIER", "Brume", "Montville", 34.3f);
+                    dat.HomeDataAdd("---", SocialState.Professional, 2, 75, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Montpistache: {
+                    dat = new DistrictData("MONTPISTACHE", "Brume", "Montville", 142.1f);
+                    dat.HomeDataAdd("---", SocialState.Professional, 2, 50, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Accalmie: {
+                    dat = new DistrictData("ACCALMIE", "Brume", "Montville", 61.6f);
+                    dat.HomeDataAdd("---", SocialState.Specialist, 2, 100, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Mielfaine: {
+                    dat = new DistrictData("MIELFAINE", "Promontoire", "Rivièrville", 19.2f);
+                    dat.HomeDataAdd("---", SocialState.Worker, 2, 75, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Boishetre: {
+                    dat = new DistrictData("BOISHÊTRE", "Promontoire", "Rivièrville", 31.7f);
+                    dat.HomeDataAdd("---", SocialState.Worker, 2, 50, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Blancheur: {
+                    dat = new DistrictData("BLANCHEUR", "Promontoire", "Rivièrville", 41.0f);
+                    dat.HomeDataAdd("---", SocialState.Worker, 2, 50, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Cheveche: {
+                    dat = new DistrictData("CHEVÊCHE", "Oiselle", "Rivièrville", 40.9f);
+                    dat.HomeDataAdd("---", SocialState.Specialist, 2, 100, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Perroquet: {
+                    dat = new DistrictData("PERROQUET", "Oiselle", "Rivièrville", 26.6f);
+                    dat.HomeDataAdd("---", SocialState.Responsible, 2, 75, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Charite: {
+                    dat = new DistrictData("CHARITÉ", "Grâce", "Rivièrville", 22.6f);
+                    dat.HomeDataAdd("---", SocialState.Professional, 2, 75, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Aronde: {
+                    dat = new DistrictData("ARONDE", "Grâce", "Rivièrville", 38.8f);
+                    dat.HomeDataAdd("---", SocialState.Specialist, 2, 75, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Palaisreine: {
+                    dat = new DistrictData("PALAISREINE", "Grâce", "Rivièrville", 31.9f);
+                    dat.HomeDataAdd("---", SocialState.Professional, 2, 75, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Parcoiseau: {
+                    dat = new DistrictData("PARCOISEAU", "Parcville", "Rivièrville", 193.5f);
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Nectar: {
+                    dat = new DistrictData("NECTAR", "Conte", "Boisville", 80.8f);
+                    dat.HomeDataAdd("---", SocialState.Specialist, 2, 100, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Lambruche: {
+                    dat = new DistrictData("LAMBRUCHE", "Conte", "Boisville", 41.0f);
+                    dat.HomeDataAdd("---", SocialState.Specialist, 2, 100, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Accord: {
+                    dat = new DistrictData("ACCORD", "Serein", "Boisville", 70.2f);
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Pivoine: {
+                    dat = new DistrictData("PIVOINE", "Versantvert", "Boisville", 67.0f);
+                    dat.HomeDataAdd("---", SocialState.Worker, 2, 50, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Peinardise: {
+                    dat = new DistrictData("PEINARDISE", "Versantvert", "Boisville", 59.5f);
+                    dat.HomeDataAdd("---", SocialState.Professional, 2, 50, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Purete: {
+                    dat = new DistrictData("PURETÉ", "Clémence", "Boisville", 36.6f);
+                    dat.HomeDataAdd("---", SocialState.Professional, 2, 75, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Renardeau: {
+                    dat = new DistrictData("RENARDEAU", "Clémence", "Boisville", 16.5f);
+                    dat.HomeDataAdd("---", SocialState.Professional, 2, 50, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Ormaie: {
+                    dat = new DistrictData("ORMAIE", "Clémence", "Boisville", 31.1f);
+                    dat.HomeDataAdd("---", SocialState.Professional, 2, 75, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Comtefleur: {
+                    dat = new DistrictData("COMTEFLEUR", "Prestige", "Boisville", 24.1f);
+                    dat.HomeDataAdd("---", SocialState.Responsible, 2, 75, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Licorne: {
+                    dat = new DistrictData("LICORNE", "Prestige", "Boisville", 22.1f);
+                    dat.HomeDataAdd("---", SocialState.Professional, 2, 75, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Gare: {
+                    dat = new DistrictData("GARE", "Prestige", "Boisville", 15.1f);
+                    dat.HomeDataAdd("---", SocialState.Professional, 2, 75, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Bruyere: {
+                    dat = new DistrictData("BRUYÈRE", "Occidental", "Boisville", 188.8f);
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Interfluve: {
+                    dat = new DistrictData("INTERFLUVE", "Lotus", "Merville", 17.7f);
+                    dat.HomeDataAdd("---", SocialState.Professional, 2, 75, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Orchidee: {
+                    dat = new DistrictData("ORCHIDÉE", "Lotus", "Merville", 23.5f);
+                    dat.HomeDataAdd("---", SocialState.Professional, 2, 75, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Cygneblanch: {
+                    dat = new DistrictData("CYGNEBLANCH", "Lotus", "Merville", 54.3f);
+                    dat.HomeDataAdd("---", SocialState.Professional, 2, 100, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Aber: {
+                    dat = new DistrictData("ABER", "Zénith", "Merville", 33.4f);
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Suavite: {
+                    dat = new DistrictData("SUAVITÉ", "Zénith", "Merville", 13.0f);
+                    dat.HomeDataAdd("---", SocialState.Professional, 2, 50, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Suffle: {
+                    dat = new DistrictData("SUFFLÉ", "Zénith", "Merville", 23.3f);
+                    dat.HomeDataAdd("---", SocialState.Specialist, 2, 75, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Harmonie: {
+                    dat = new DistrictData("HARMONIE", "Zénith", "Merville", 16.6f);
+                    dat.HomeDataAdd("---", SocialState.Responsible, 2, 75, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Cedres: {
+                    dat = new DistrictData("CÈDRES", "Vanille", "Merville", 34.5f);
+                    dat.HomeDataAdd("---", SocialState.Worker, 2, 75, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Gattilier: {
+                    dat = new DistrictData("GATTILIER", "Vanille", "Merville", 15.0f);
+                    dat.HomeDataAdd("---", SocialState.Worker, 2, 50, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Littoral: {
+                    dat = new DistrictData("LITTORAL", "Maritime", "Merville", 17.4f);
+                    dat.HomeDataAdd("---", SocialState.Professional, 2, 75, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Coquille: {
+                    dat = new DistrictData("COQUILLE", "Maritime", "Merville", 35.4f);
+                    dat.HomeDataAdd("---", SocialState.Responsible, 2, 50, new int[1] { 10 });
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Goeland: {
+                    dat = new DistrictData("GOÉLAND", "Maritime", "Merville", 57.4f);
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Tissage: {
+                    dat = new DistrictData("TISSAGE", "Phare", "Merville", 128.0f);
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Ville.q_Port: {
+                    dat = new DistrictData("PORT", "Phare", "Merville", 78.4f);
+                    return dat;
+                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
+                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
             }
-        }
-
-        void GetDataCanton(string code)
-        {
-
-        }
-
-        void GetDataVille(string code)
-        {
-
-        }
-
-        string GenMaisonData(string type, int grandeur, int count, int[] config)
-        {
-            type += " : ";
-
-            int configCount = config.Length;
-            int appartaments = 0;
-
-            for (byte i = 0; i < configCount; i++)
-            {
-                type += config[i].ToString() + " ";
-                appartaments += config[i];
-            }
-
-            residents += appartaments * count * 2;
-            id_res += appartaments * grandeur;
-
-            type += " => " + count.ToString();
-            return type;
-        }
-
-        string[] WorkersSet()
-        {
-            byte cnt = 10;
-            int[] dat = new int[cnt];
-            string[] arr = new string[cnt];
-
-            dat[0] = (int)(production * emp_index);
-            dat[1] = (int)(office * emp_index);
-            dat[2] = (int)(trade * emp_index);
-            dat[3] = (int)(culture * emp_index);
-            dat[4] = (int)(hotel * emp_index);
-            dat[5] = (int)(education * emp_index);
-            dat[6] = (int)(medicine * emp_index);
-            dat[7] = (int)(services * emp_index);
-            dat[8] = (int)(sport * emp_index);
-            dat[9] = (int)(administration * emp_index);
-
-            for (byte i = 0; i < cnt; i++)
-            {
-                employ += dat[i];
-                arr[i] = dat[i].ToString();
-            }
-
-            return arr;
+            return new DistrictData();
         }
     }
 }
