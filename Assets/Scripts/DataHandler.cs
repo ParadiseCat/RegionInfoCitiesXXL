@@ -549,8 +549,6 @@ namespace ParadiseVille
             Dictionary<SocialState, int> residentsDictionary = new Dictionary<SocialState, int>();
             Dictionary<EmployerType, int> employersDictionary = new Dictionary<EmployerType, int>();
 
-            int emloyerGroupCounter = 0;
-
             foreach (SocialState socialState in allSocialStates)
             {
                 residentsDictionary.Add(socialState, 0);
@@ -625,19 +623,49 @@ namespace ParadiseVille
             objTextDraw.TextWrite("Densité actif", (Mathf.RoundToInt((countEmployers + (countResidents / 2)) / squareCanton) * 100).ToString(), 30f, 460f, 12, Color.black);
             objTextDraw.TextWrite("Député", localDepute.ToString(), 30f, 490f, 12, Color.black);
 
+            int[] social = new int[4]
+            {
+                residentsDictionary[SocialState.Worker],
+                residentsDictionary[SocialState.Specialist],
+                residentsDictionary[SocialState.Professional],
+                residentsDictionary[SocialState.Responsible]
+            };
+
+            int[] socialPercent = PercentValuesGet(countResidents, social);
+
             objTextDraw.TextWrite("SOCIÉTÉ", 30f, 560f, 14, Color.red);
-            objTextDraw.TextWrite("Ouvrier", residentsDictionary[SocialState.Worker].ToString(), 30f, 600f, 12, Color.black);
-            objTextDraw.TextWrite("Spécialiste", residentsDictionary[SocialState.Specialist].ToString(), 30f, 630f, 12, Color.black);
-            objTextDraw.TextWrite("Professionnel", residentsDictionary[SocialState.Professional].ToString(), 30f, 660f, 12, Color.black);
-            objTextDraw.TextWrite("Responsable", residentsDictionary[SocialState.Responsible].ToString(), 30f, 690f, 12, Color.black);
+            objTextDraw.TextWrite("Ouvrier", social[0].ToString(), socialPercent[0], 30f, 600f, 12, Color.black);
+            objTextDraw.TextWrite("Spécialiste", social[1].ToString(), socialPercent[1], 30f, 630f, 12, Color.black);
+            objTextDraw.TextWrite("Professionnel", social[2].ToString(), socialPercent[2], 30f, 660f, 12, Color.black);
+            objTextDraw.TextWrite("Responsable", social[3].ToString(), socialPercent[3], 30f, 690f, 12, Color.black);
+
+            int[] employ = new int[10]
+            {
+                employersDictionary[EmployerType.Production],
+                employersDictionary[EmployerType.Office],
+                employersDictionary[EmployerType.Trade],
+                employersDictionary[EmployerType.Culture],
+                employersDictionary[EmployerType.Hotel],
+                employersDictionary[EmployerType.Education],
+                employersDictionary[EmployerType.Medicine],
+                employersDictionary[EmployerType.Services],
+                employersDictionary[EmployerType.Sport],
+                employersDictionary[EmployerType.Administration]
+            };
+
+            int[] employPercent = PercentValuesGet(countEmployers, employ);
 
             objTextDraw.TextWrite("EMPLOI", 400f, 280f, 14, Color.red);
-
-            foreach (EmployerType employers in allEmployerTypes)
-            {
-                objTextDraw.TextWrite(allEmployerNames[employers], employersDictionary[employers].ToString(), 400f, 340f + 30f * emloyerGroupCounter, 12, Color.black);
-                emloyerGroupCounter++;
-            }
+            objTextDraw.TextWrite("Production", employ[0].ToString(), employPercent[0], 400f, 340f, 12, Color.black);
+            objTextDraw.TextWrite("Office", employ[1].ToString(), employPercent[1], 400f, 370f, 12, Color.black);
+            objTextDraw.TextWrite("Trade", employ[2].ToString(), employPercent[2], 400f, 400f, 12, Color.black);
+            objTextDraw.TextWrite("Culture", employ[3].ToString(), employPercent[3], 400f, 430f, 12, Color.black);
+            objTextDraw.TextWrite("Hotel", employ[4].ToString(), employPercent[4], 400f, 460f, 12, Color.black);
+            objTextDraw.TextWrite("Education", employ[5].ToString(), employPercent[5], 400f, 490f, 12, Color.black);
+            objTextDraw.TextWrite("Medicine", employ[6].ToString(), employPercent[6], 400f, 520f, 12, Color.black);
+            objTextDraw.TextWrite("Services", employ[7].ToString(), employPercent[7], 400f, 550f, 12, Color.black);
+            objTextDraw.TextWrite("Sport", employ[8].ToString(), employPercent[8], 400f, 580f, 12, Color.black);
+            objTextDraw.TextWrite("Administration", employ[9].ToString(), employPercent[9], 400f, 610f, 12, Color.black);
         }
 
         void VilletteHandler(Ville villette)
@@ -653,8 +681,6 @@ namespace ParadiseVille
 
             Dictionary<SocialState, int> residentsDictionary = new Dictionary<SocialState, int>();
             Dictionary<EmployerType, int> employersDictionary = new Dictionary<EmployerType, int>();
-
-            int emloyerGroupCounter = 0;
 
             foreach (SocialState socialState in allSocialStates)
             {
@@ -720,19 +746,49 @@ namespace ParadiseVille
             objTextDraw.TextWrite("Densité repos", (Mathf.RoundToInt(countResidents / squareVillette) * 100).ToString(), 30f, 430f, 12, Color.black);
             objTextDraw.TextWrite("Densité actif", (Mathf.RoundToInt((countEmployers + (countResidents / 2)) / squareVillette) * 100).ToString(), 30f, 460f, 12, Color.black);
 
+            int[] social = new int[4]
+            {
+                residentsDictionary[SocialState.Worker],
+                residentsDictionary[SocialState.Specialist],
+                residentsDictionary[SocialState.Professional],
+                residentsDictionary[SocialState.Responsible]
+            };
+
+            int[] socialPercent = PercentValuesGet(countResidents, social);
+
             objTextDraw.TextWrite("SOCIÉTÉ", 30f, 560f, 14, Color.red);
-            objTextDraw.TextWrite("Ouvrier", residentsDictionary[SocialState.Worker].ToString(), 30f, 620f, 12, Color.black);
-            objTextDraw.TextWrite("Spécialiste", residentsDictionary[SocialState.Specialist].ToString(), 30f, 650f, 12, Color.black);
-            objTextDraw.TextWrite("Professionnel", residentsDictionary[SocialState.Professional].ToString(), 30f, 680f, 12, Color.black);
-            objTextDraw.TextWrite("Responsable", residentsDictionary[SocialState.Responsible].ToString(), 30f, 710f, 12, Color.black);
+            objTextDraw.TextWrite("Ouvrier", social[0].ToString(), socialPercent[0], 30f, 620f, 12, Color.black);
+            objTextDraw.TextWrite("Spécialiste", social[1].ToString(), socialPercent[1], 30f, 650f, 12, Color.black);
+            objTextDraw.TextWrite("Professionnel", social[2].ToString(), socialPercent[2], 30f, 680f, 12, Color.black);
+            objTextDraw.TextWrite("Responsable", social[3].ToString(), socialPercent[3], 30f, 710f, 12, Color.black);
+
+            int[] employ = new int[10]
+            {
+                employersDictionary[EmployerType.Production],
+                employersDictionary[EmployerType.Office],
+                employersDictionary[EmployerType.Trade],
+                employersDictionary[EmployerType.Culture],
+                employersDictionary[EmployerType.Hotel],
+                employersDictionary[EmployerType.Education],
+                employersDictionary[EmployerType.Medicine],
+                employersDictionary[EmployerType.Services],
+                employersDictionary[EmployerType.Sport],
+                employersDictionary[EmployerType.Administration]
+            };
+
+            int[] employPercent = PercentValuesGet(countEmployers, employ);
 
             objTextDraw.TextWrite("EMPLOI", 400f, 280f, 14, Color.red);
-
-            foreach (EmployerType employers in allEmployerTypes)
-            {
-                objTextDraw.TextWrite(allEmployerNames[employers], employersDictionary[employers].ToString(), 400f, 340f + 30f * emloyerGroupCounter, 12, Color.black);
-                emloyerGroupCounter++;
-            }
+            objTextDraw.TextWrite("Production", employ[0].ToString(), employPercent[0], 400f, 340f, 12, Color.black);
+            objTextDraw.TextWrite("Office", employ[1].ToString(), employPercent[1], 400f, 370f, 12, Color.black);
+            objTextDraw.TextWrite("Trade", employ[2].ToString(), employPercent[2], 400f, 400f, 12, Color.black);
+            objTextDraw.TextWrite("Culture", employ[3].ToString(), employPercent[3], 400f, 430f, 12, Color.black);
+            objTextDraw.TextWrite("Hotel", employ[4].ToString(), employPercent[4], 400f, 460f, 12, Color.black);
+            objTextDraw.TextWrite("Education", employ[5].ToString(), employPercent[5], 400f, 490f, 12, Color.black);
+            objTextDraw.TextWrite("Medicine", employ[6].ToString(), employPercent[6], 400f, 520f, 12, Color.black);
+            objTextDraw.TextWrite("Services", employ[7].ToString(), employPercent[7], 400f, 550f, 12, Color.black);
+            objTextDraw.TextWrite("Sport", employ[8].ToString(), employPercent[8], 400f, 580f, 12, Color.black);
+            objTextDraw.TextWrite("Administration", employ[9].ToString(), employPercent[9], 400f, 610f, 12, Color.black);
         }
 
         void VillHandler()
@@ -743,8 +799,6 @@ namespace ParadiseVille
 
             Dictionary<SocialState, int> residentsDictionary = new Dictionary<SocialState, int>();
             Dictionary<EmployerType, int> employersDictionary = new Dictionary<EmployerType, int>();
-
-            int emloyerGroupCounter = 0;
 
             foreach (SocialState socialState in allSocialStates)
             {
@@ -803,19 +857,133 @@ namespace ParadiseVille
             objTextDraw.TextWrite("Densité repos", (Mathf.RoundToInt(countResidents / squareVille) * 100).ToString(), 30f, 430f, 12, Color.black);
             objTextDraw.TextWrite("Densité actif", (Mathf.RoundToInt((countEmployers + (countResidents / 2)) / squareVille) * 100).ToString(), 30f, 460f, 12, Color.black);
 
+            int[] social = new int[4]
+            {
+                residentsDictionary[SocialState.Worker],
+                residentsDictionary[SocialState.Specialist],
+                residentsDictionary[SocialState.Professional],
+                residentsDictionary[SocialState.Responsible]
+            };
+
+            int[] socialPercent = PercentValuesGet(countResidents, social);
+
             objTextDraw.TextWrite("SOCIÉTÉ", 30f, 560f, 14, Color.red);
-            objTextDraw.TextWrite("Ouvrier", residentsDictionary[SocialState.Worker].ToString(), 30f, 620f, 12, Color.black);
-            objTextDraw.TextWrite("Spécialiste", residentsDictionary[SocialState.Specialist].ToString(), 30f, 650f, 12, Color.black);
-            objTextDraw.TextWrite("Professionnel", residentsDictionary[SocialState.Professional].ToString(), 30f, 680f, 12, Color.black);
-            objTextDraw.TextWrite("Responsable", residentsDictionary[SocialState.Responsible].ToString(), 30f, 710f, 12, Color.black);
+            objTextDraw.TextWrite("Ouvrier", social[0].ToString(), socialPercent[0], 30f, 620f, 12, Color.black);
+            objTextDraw.TextWrite("Spécialiste", social[1].ToString(), socialPercent[1], 30f, 650f, 12, Color.black);
+            objTextDraw.TextWrite("Professionnel", social[2].ToString(), socialPercent[2], 30f, 680f, 12, Color.black);
+            objTextDraw.TextWrite("Responsable", social[3].ToString(), socialPercent[3], 30f, 710f, 12, Color.black);
+
+            int[] employ = new int[10]
+            {
+                employersDictionary[EmployerType.Production],
+                employersDictionary[EmployerType.Office],
+                employersDictionary[EmployerType.Trade],
+                employersDictionary[EmployerType.Culture],
+                employersDictionary[EmployerType.Hotel],
+                employersDictionary[EmployerType.Education],
+                employersDictionary[EmployerType.Medicine],
+                employersDictionary[EmployerType.Services],
+                employersDictionary[EmployerType.Sport],
+                employersDictionary[EmployerType.Administration]
+            };
+
+            int[] employPercent = PercentValuesGet(countEmployers, employ);
 
             objTextDraw.TextWrite("EMPLOI", 400f, 280f, 14, Color.red);
+            objTextDraw.TextWrite("Production", employ[0].ToString(), employPercent[0], 400f, 340f, 12, Color.black);
+            objTextDraw.TextWrite("Office", employ[1].ToString(), employPercent[1], 400f, 370f, 12, Color.black);
+            objTextDraw.TextWrite("Trade", employ[2].ToString(), employPercent[2], 400f, 400f, 12, Color.black);
+            objTextDraw.TextWrite("Culture", employ[3].ToString(), employPercent[3], 400f, 430f, 12, Color.black);
+            objTextDraw.TextWrite("Hotel", employ[4].ToString(), employPercent[4], 400f, 460f, 12, Color.black);
+            objTextDraw.TextWrite("Education", employ[5].ToString(), employPercent[5], 400f, 490f, 12, Color.black);
+            objTextDraw.TextWrite("Medicine", employ[6].ToString(), employPercent[6], 400f, 520f, 12, Color.black);
+            objTextDraw.TextWrite("Services", employ[7].ToString(), employPercent[7], 400f, 550f, 12, Color.black);
+            objTextDraw.TextWrite("Sport", employ[8].ToString(), employPercent[8], 400f, 580f, 12, Color.black);
+            objTextDraw.TextWrite("Administration", employ[9].ToString(), employPercent[9], 400f, 610f, 12, Color.black);
+        }
 
-            foreach (EmployerType employers in allEmployerTypes)
+        private int[] PercentValuesGet(int total, params int[] dataArray)
+        {
+            int arrLength = dataArray.Length;
+            int percentTotal = 100;
+
+            if (arrLength > 0)
             {
-                objTextDraw.TextWrite(allEmployerNames[employers], employersDictionary[employers].ToString(), 400f, 340f + 30f * emloyerGroupCounter, 12, Color.black);
-                emloyerGroupCounter++;
+                int[] arrPercents = new int[arrLength];
+
+                if (total == 0)
+                {
+                    for (int i = 0; i < arrLength; i++)
+                    {
+                        arrPercents[i] = 0;
+                    }
+                }
+                else
+                {
+                    int currentPercentCount = 0;
+
+                    for (int i = 0; i < arrLength; i++)
+                    {
+                        arrPercents[i] = Mathf.RoundToInt(dataArray[i] / (float)total * percentTotal);
+                        currentPercentCount += arrPercents[i];
+                    }
+
+                    int loop = 0;
+
+                    while (currentPercentCount != percentTotal)
+                    {
+                        int changeIndex = 0;
+                        float changeGap = 0f;
+
+                        loop++;
+
+                        if (currentPercentCount < percentTotal)
+                        {
+                            for (int i = 0; i < arrLength; i++)
+                            {
+                                float fValue = dataArray[i] / (float)total * percentTotal;
+                                float changed = fValue - arrPercents[i];
+
+                                if (changed > changeGap)
+                                {
+                                    changeGap = changed;
+                                    changeIndex = i;
+                                }
+                            }
+
+                            arrPercents[changeIndex] += 1;
+                            currentPercentCount += 1;
+                        }
+                        else
+                        {
+                            for (int i = 0; i < arrLength; i++)
+                            {
+                                float fValue = dataArray[i] / (float)total * percentTotal;
+                                float changed = fValue - arrPercents[i];
+
+                                if (changed < changeGap)
+                                {
+                                    changeGap = changed;
+                                    changeIndex = i;
+                                }
+                            }
+
+                            arrPercents[changeIndex] -= 1;
+                            currentPercentCount -= 1;
+                        }
+
+                        if(loop >= 5)
+                        {
+                            Debug.Log("error cycle while");
+                            return arrPercents;
+                        }
+                    }
+                }
+
+                return arrPercents;
             }
+            else
+                return new int[0];
         }
     }
 }

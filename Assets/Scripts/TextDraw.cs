@@ -17,7 +17,7 @@ namespace ParadiseVille
         {
             objCanvas = new GameObject("objCanvas");
             objCanvas.AddComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
-            objCanvas.transform.position = new Vector3(319.5f, 179.5f);
+            objCanvas.transform.position = new Vector3(GameCamera.realWidth, GameCamera.realHeight);
 
             gameFont = Resources.GetBuiltinResource<Font>("Arial.ttf");
             listTextObjects = new List<GameObject>();
@@ -27,6 +27,30 @@ namespace ParadiseVille
         {
             foreach (GameObject obj in listTextObjects) Object.Destroy(obj);
             listTextObjects.Clear();
+        }
+
+        public void TextWrite(string name, string text, int percent, float fx, float fy, int size, Color col)
+        {
+            fx = fx * GameCamera.scaleCamera;
+            fy = (2 * GameCamera.cameraHalf_Height - fy) * GameCamera.scaleCamera;
+
+            GameObject obj = new GameObject("objText_" + name);
+            obj.transform.SetParent(objCanvas.transform);
+
+            Text c_text = obj.AddComponent<Text>();
+            c_text.text = name + ": " + text + " ( " + percent.ToString() + "% )";
+            c_text.font = gameFont;
+            c_text.fontSize = size;
+            c_text.color = col;
+
+            RectTransform c_rect = obj.GetComponent<RectTransform>();
+            c_rect.anchorMin = new Vector2(0f, 1f);
+            c_rect.anchorMax = new Vector2(0f, 1f);
+            c_rect.pivot = new Vector2(0f, 1f);
+            c_rect.position = new Vector3(fx, fy);
+            c_rect.sizeDelta = new Vector2(400, 2 * size);
+
+            listTextObjects.Add(obj);
         }
 
         public void TextWrite(string name, string text, float fx, float fy, int size, Color col)

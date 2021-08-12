@@ -14,20 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SimpleSelectedItems:
     m_Keys:
-    - Assets/Resources/Materials.meta
-    - Assets/Resources/Materials/ButtonSelect.mat
-    - Assets/Resources/Materials/ButtonSelect.mat.meta
+    - Assets/Resources/Materials/ButtonDefault.mat
+    - Assets/Resources/Materials/ButtonDefault.mat.meta
     - Assets/Scripts/ButtonGame.cs
-    - Assets/Scripts/ButtonGame.cs.meta
     - Assets/Scripts/ButtonPanel.cs
-    - Assets/Scripts/ButtonPanel.cs.meta
-    - Assets/Scripts/DataHandler.cs
     - Assets/Scripts/GameController.cs
-    - Assets/Scripts/GameMap.cs
-    - Assets/Scripts/StaticData.cs
-    - Assets/Scripts/TextDraw.cs
     - 
-    m_Values: 01010101010101010101010101
+    m_Values: 000000000000
   RevisionSummary: 
   ChangesSearchValue: 
   SelectedHistoryRevision: 

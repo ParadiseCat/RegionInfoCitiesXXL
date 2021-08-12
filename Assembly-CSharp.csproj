@@ -65,8 +65,6 @@
     <Compile Include="Assets\Scripts\TextDraw.cs" />
     <Compile Include="Assets\Scripts\StaticData.cs" />
     <Compile Include="Assets\Scripts\GameMap.cs" />
-    <Compile Include="Assets\Scripts\ButtonPanel.cs" />
-    <Compile Include="Assets\Scripts\ButtonGame.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

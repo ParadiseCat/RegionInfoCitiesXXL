@@ -341,8 +341,6 @@
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/UnityEngine.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/VSSettingsProvider.ref.dll"
-"Assets/Scripts/ButtonGame.cs"
-"Assets/Scripts/ButtonPanel.cs"
 "Assets/Scripts/CityData.cs"
 "Assets/Scripts/DataHandler.cs"
 "Assets/Scripts/GameController.cs"

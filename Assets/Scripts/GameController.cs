@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 namespace ParadiseVille
 {
@@ -16,6 +15,7 @@ namespace ParadiseVille
 
         const int mapX = 10000;
         Mode mode;
+        Rect[] buttonRects;
 
         void Start()
         {
@@ -23,12 +23,40 @@ namespace ParadiseVille
             objMap.ObjectSpriteCreate(GameCamera.cameraHalf_Width - 512f, 0f, "ville", 0);
 
             objTextureMap = new GameMap();
-
             objDataHandler = new DataHandler(Mode.Ville);
 
+            buttonRects = new Rect[4]
+            {
+                GetScaleRect(450f, 30f, 100f, 60f), 
+                GetScaleRect(560f, 30f, 100f, 60f),
+                GetScaleRect(450f, 120f, 100f, 60f),
+                GetScaleRect(560f, 120f, 100f, 60f)
+            };
+                
             SetModeMap(Mode.Ville);
+        }
 
-            ButtonPanelSet();
+        public void OnGUI()
+        {
+            if (GUI.Button(buttonRects[0], "Ville"))
+            {
+                if(mode != Mode.Ville) SetModeMap(Mode.Ville);
+            }
+
+            if (GUI.Button(buttonRects[1], "Villette"))
+            {
+                if (mode != Mode.Villette) SetModeMap(Mode.Villette);
+            }
+
+            if (GUI.Button(buttonRects[2], "Canton"))
+            {
+                if (mode != Mode.Canton) SetModeMap(Mode.Canton);
+            }
+
+            if (GUI.Button(buttonRects[3], "Quartier"))
+            {
+                if (mode != Mode.Quartier) SetModeMap(Mode.Quartier);
+            }
         }
 
         void Update()
@@ -43,24 +71,6 @@ namespace ParadiseVille
             {
                 int pixelCount = objTextureMap.GetPixelCount(ref hexColor);
                 CalcRegionSquare(mapX, objTextureMap.GetTextureWidth(), pixelCount);
-            }
-            else if(Input.GetKeyDown(KeyCode.Backspace))
-            {
-                switch (mode)
-                {
-                    case Mode.Quartier:
-                        SetModeMap(Mode.Canton);
-                        break;
-                    case Mode.Canton:
-                        SetModeMap(Mode.Villette);
-                        break;
-                    case Mode.Villette:
-                        SetModeMap(Mode.Ville);
-                        break;
-                    case Mode.Ville:
-                        SetModeMap(Mode.Quartier);
-                        break;
-                }
             }
             else if (Input.GetKeyDown(KeyCode.Escape))
             {
@@ -98,35 +108,14 @@ namespace ParadiseVille
 
                 objTextureMap.ObjectSpriteCreate(GameCamera.cameraHalf_Width - 512f, 0f, dataFile, 1);
                 objTextureMap.TextureExtractFromSprite(dataFile);
+
+                objDataHandler.ShowData(mode, "FFFFFF");
             }
         }
 
-        void ButtonPanelSet()
+        Rect GetScaleRect(float x, float y, float w, float h)
         {
-            GameObject objPanel = new GameObject("objPanel");
-            objPanel.AddComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
-            objPanel.transform.position = new Vector3(319.5f, 179.5f);
-
-            Font panelFont = Resources.GetBuiltinResource<Font>("Arial.ttf");
-
-            GameObject objButton = new GameObject("Button_1");
-            objButton.transform.SetParent(objPanel.transform);
-
-            float fx = 450f;
-            float fy = 50f;
-            fx = fx * GameCamera.scaleCamera;
-            fy = (2 * GameCamera.cameraHalf_Height - fy) * GameCamera.scaleCamera;
-
-            RectTransform buttonRectTransform = objButton.AddComponent<RectTransform>();
-            buttonRectTransform.pivot = new Vector2(0f, 1f);
-            buttonRectTransform.position = new Vector3(fx, fy);
-            buttonRectTransform.sizeDelta = new Vector2(50f, 30f);
-
-            Image buttonImage = objButton.AddComponent<Image>();
-            buttonImage.material = Resources.Load<Material>("Materials/ButtonSelect");
-
-            Button buttonButton = objButton.AddComponent<Button>();
-            //buttonButton.OnPointerClick()
+            return new Rect(x * GameCamera.scaleCamera, y * GameCamera.scaleCamera, w * GameCamera.scaleCamera, h * GameCamera.scaleCamera);
         }
     }
 }
