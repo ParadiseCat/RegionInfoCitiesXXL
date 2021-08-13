@@ -33,6 +33,7 @@ namespace ParadiseVille
         {
             fx = fx * GameCamera.scaleCamera;
             fy = (2 * GameCamera.cameraHalf_Height - fy) * GameCamera.scaleCamera;
+            size = Mathf.RoundToInt(size * GameCamera.scaleCamera);
 
             GameObject obj = new GameObject("objText_" + name);
             obj.transform.SetParent(objCanvas.transform);
@@ -57,6 +58,7 @@ namespace ParadiseVille
         {
             fx = fx * GameCamera.scaleCamera;
             fy = (2 * GameCamera.cameraHalf_Height - fy) * GameCamera.scaleCamera;
+            size = Mathf.RoundToInt(size * GameCamera.scaleCamera);
 
             GameObject obj = new GameObject("objText_" + name);
             obj.transform.SetParent(objCanvas.transform);
@@ -81,6 +83,7 @@ namespace ParadiseVille
         {
             fx = fx * GameCamera.scaleCamera;
             fy = (2 * GameCamera.cameraHalf_Height - fy) * GameCamera.scaleCamera;
+            size = Mathf.RoundToInt(size * GameCamera.scaleCamera);
 
             GameObject obj = new GameObject("objText_" + name);
             obj.transform.SetParent(objCanvas.transform);

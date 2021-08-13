@@ -65,6 +65,8 @@
     <Compile Include="Assets\Scripts\TextDraw.cs" />
     <Compile Include="Assets\Scripts\StaticData.cs" />
     <Compile Include="Assets\Scripts\GameMap.cs" />
+    <Compile Include="Assets\Scripts\Interfaces.cs" />
+    <Compile Include="Assets\Scripts\DataStructs.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

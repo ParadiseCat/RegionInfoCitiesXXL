@@ -6,202 +6,6 @@ using UnityEngine;
 namespace ParadiseVille
 {
     /// <summary>
-    /// List of cities dicticts
-    /// </summary>
-    public enum Ville
-    {
-        v_Fleurville = 100,
-            c_MontFleur = 110,
-                q_Jardinfleuri = 111,
-                q_Ilechateau = 112,
-                q_Roifrenaie = 113,
-                q_Cotelevant = 114,
-            c_Coeurville = 120,
-                q_Hotel = 121,
-                q_Riveciel = 122,
-                q_Eclaires = 123,
-            c_Gloir = 130,
-                q_Hallesluxe = 131,
-                q_Aquarelle = 132,
-                q_Promenade = 133,
-            c_Imperial = 140,
-                q_Idylle = 141,
-                q_Anthese = 142,
-            c_Promission = 150,
-                q_Perpetuel = 151,
-                q_Sabbat = 152,
-            c_Palefroi = 160,
-                q_Victoire = 161,
-                q_Lumiere = 162,
-                q_Iris = 163,
-                q_Sophora = 164,
-        v_Cotierville = 200,
-            c_Soleil = 210,
-                q_Charme = 211,
-                q_Cotecorail = 212,
-                q_Artisan = 213,
-            c_Couleur = 220,
-                q_Chandelle = 221,
-                q_Parfumeur = 222,
-                q_Gremil = 223,
-                q_Hulotte = 224,
-            c_Castel = 230,
-                q_Prosperite = 231,
-                q_Pastel = 232,
-                q_Sansonnet = 233,
-            c_Chaleur = 240,
-                q_Cotepalmier = 241,
-                q_Cotecafe = 242,
-                q_Brise =243,
-            c_Tropique = 250,
-                q_Tadorne = 251,
-                q_Cocotier = 252,
-                q_Montfee = 253,
-        v_Montville = 300,
-            c_Roquerie = 310,
-                q_Nichoir = 311,
-                q_Trefleblue = 312,
-            c_Ravinlis = 320,
-                q_Paysage = 321,
-                q_Croissance = 322,
-                q_Tilleul = 323,
-            c_Liberte = 330,
-                q_Enchanteur = 331,
-                q_Sublimite = 332,
-            c_Brume = 340,
-                q_Tulipier = 341,
-                q_Montpistache = 342,
-                q_Accalmie =343,
-        v_Rivierville = 400,
-            c_Promontoire = 410,
-                q_Mielfaine = 411,
-                q_Boishetre = 412,
-                q_Blancheur = 413,
-            c_Oiselle = 420,
-                q_Cheveche = 421,
-                q_Perroquet = 422,
-            c_Grace = 430,
-                q_Charite = 431,
-                q_Aronde = 432,
-                q_Palaisreine = 433,
-            c_Parcville = 440,
-                q_Parcoiseau = 441,
-        v_Boisville = 600,
-            c_Conte = 610,
-                q_Nectar = 611,
-                q_Lambruche = 612,
-            c_Serein = 620,
-                q_Accord = 621,
-            c_Versantvert = 630,
-                q_Pivoine = 631,
-                q_Peinardise = 632,
-            c_Clemence = 640,
-                q_Purete = 641,
-                q_Renardeau = 642,
-                q_Ormaie = 643,
-            c_Prestige = 650,
-                q_Comtefleur = 651,
-                q_Licorne = 652,
-                q_Gare = 653,
-            c_Occidental = 660,
-                q_Bruyere = 661,
-        v_Merville = 700,
-            c_Lotus = 710,
-                q_Interfluve = 711,
-                q_Orchidee = 712,
-                q_Cygneblanch = 713,
-            c_Zenith = 720,
-                q_Aber = 721,
-                q_Suavite = 722,
-                q_Suffle = 723,
-                q_Harmonie = 724,
-            c_Vanille = 730,
-                q_Cedres = 731,
-                q_Gattilier = 732,
-            c_Maritime = 740,
-                q_Littoral = 741,
-                q_Coquille = 742,
-                q_Goeland = 743,
-            c_Phare = 750,
-                q_Tissage = 751,
-                q_Port = 752
-    }
-
-    /// <summary>
-    /// Struct for home data in dicticts
-    /// </summary>
-    public struct HomeData
-    {
-        public string facade;
-        public SocialState social;
-        public int size;
-        public int count;
-        public int[] appartaments;
-
-        public HomeData(string _facade, SocialState _social, int _size, int _count, int[] _appartaments)
-        {
-            facade = _facade;
-            social = _social;
-            size = _size;
-            count = _count;
-            appartaments = _appartaments;
-        }
-    }
-
-    /// <summary>
-    /// Struct for general data of disctrict
-    /// </summary>
-    public struct DistrictData
-    {
-        public string quartier { private set; get; }
-        public string canton { private set; get; }
-        public string villette { private set; get; }
-        public float square { private set; get; }
-
-        public List<HomeData> homeDataList { private set; get; }
-        public Dictionary<EmployerType, int> employersDataDictionary { private set; get; }
-        public List<string> placeDataList { private set; get; }
-
-        public DistrictData(string _quartier, string _canton, string _villette, float _square)
-        {
-            quartier = _quartier;
-            canton = _canton;
-            villette = _villette;
-            square = _square;
-
-            homeDataList = new List<HomeData>();
-
-            employersDataDictionary = new Dictionary<EmployerType, int>();
-            List<EmployerType> allEmployerTypes = Enum.GetValues(typeof(EmployerType)).Cast<EmployerType>().ToList();
-
-            foreach (EmployerType employerType in allEmployerTypes)
-            {
-                employersDataDictionary.Add(employerType, 0);
-            }
-
-            placeDataList = new List<string>();
-        }
-
-        public void HomeDataAdd(string _facade, SocialState _social, int _size, int _count, int[] _appartaments)
-        {
-            homeDataList.Add(new HomeData(_facade, _social, _size, _count, _appartaments));
-        }
-
-        public void EmployersDataAdd(EmployerType employerType, int count)
-        {
-            employersDataDictionary[employerType] += count;
-        }
-
-        public void PlaceDataAdd(params string[] placeArray)
-        {
-            foreach (string place in placeArray)
-            {
-                placeDataList.Add(place);
-            }
-        }
-    }
-
-    /// <summary>
     /// Handler data info for it input in Game as text
     /// </summary>
     public class DataHandler
@@ -210,7 +14,7 @@ namespace ParadiseVille
 
         const int appartamentHabitans = 2;
         const int deputeDictictHabitans = 500;
-        const float employersPerUnit = 5.5f;
+        const float employersPerUnit = 5.36f;
 
         string hexColor = "";
         Mode mapMode;
@@ -218,7 +22,6 @@ namespace ParadiseVille
         List<EmployerType> allEmployerTypes;
         List<SocialState> allSocialStates;
         List<Ville> allQuarties;
-        Dictionary<EmployerType, string> allEmployerNames;
 
         public DataHandler(Mode modeDefault)
         {
@@ -226,31 +29,8 @@ namespace ParadiseVille
             allEmployerTypes = Enum.GetValues(typeof(EmployerType)).Cast<EmployerType>().ToList();
             allSocialStates = Enum.GetValues(typeof(SocialState)).Cast<SocialState>().ToList();
             allQuarties = Enum.GetValues(typeof(Ville)).Cast<Ville>().ToList();
-            allEmployerNames = new Dictionary<EmployerType, string>();
 
             mapMode = modeDefault;
-
-            string[] nameEmployersGroup = new string[10]
-            {
-                "Production", 
-                "Office", 
-                "Trade", 
-                "Culture", 
-                "Hotel", 
-                "Education", 
-                "Medicine", 
-                "Services", 
-                "Sport", 
-                "Administration"
-            };
-
-            int index = 0;
-
-            foreach (EmployerType employerGroup in allEmployerTypes)
-            {
-                allEmployerNames.Add(employerGroup, nameEmployersGroup[index]);
-                index++;
-            }
         }
 
         public void ShowData(Mode mode, string hexCode)
@@ -259,8 +39,6 @@ namespace ParadiseVille
             {
                 hexColor = hexCode;
                 mapMode = mode;
-
-                objTextDraw.TextClean();
 
                 switch (mode)
                 {
@@ -449,16 +227,21 @@ namespace ParadiseVille
                         }
                         break;
                     }
-                    case Mode.Ville:
+                    case Mode.Ville: {
                         VillHandler();
                         break;
+                    }
                 }
             }
         }
 
         void QuartierHandler(Ville quartier)
         {
+            objTextDraw.TextClean();
+
             DistrictData dat = DataVille.Information(quartier);
+
+            Dictionary<EmployerType, string> allEmployerNames = new Dictionary<EmployerType, string>();
 
             int countResidents = 0;
             int countEmployes = 0;
@@ -468,6 +251,27 @@ namespace ParadiseVille
             bool employersExists = false;
             bool placeExists = false;
 
+            string[] nameEmployersGroup = new string[10]
+            {
+                "Production",
+                "Office",
+                "Trade",
+                "Culture",
+                "Hotel",
+                "Education",
+                "Medicine",
+                "Services",
+                "Sport",
+                "Administration"
+            };
+
+            int index = 0;
+
+            foreach (EmployerType employerGroup in allEmployerTypes)
+            {
+                allEmployerNames.Add(employerGroup, nameEmployersGroup[index]);
+                index++;
+            }
 
             foreach (HomeData home in dat.homeDataList)
             {
@@ -489,7 +293,7 @@ namespace ParadiseVille
                 if (employerInGroup > 0)
                 {
                     countEmployes += employerInGroup;
-                    objTextDraw.TextWrite(allEmployerNames[employers], employerInGroup.ToString(), 30f, 600f + 30f * emloyerGroupCounter, 12, Color.black);
+                    objTextDraw.TextWrite(allEmployerNames[employers], employerInGroup.ToString(), 30f, 600f + 30f * emloyerGroupCounter, 25, Color.black);
                     emloyerGroupCounter++;
 
                     if (!employersExists)
@@ -501,7 +305,7 @@ namespace ParadiseVille
 
             foreach (string objectName in dat.placeDataList)
             {
-                objTextDraw.TextWrite(objectName, 400f, 450f + 25f * placeCounter, 10, Color.black);
+                objTextDraw.TextWrite(objectName, 400f, 340f + 30f * placeCounter, 25, Color.black);
                 placeCounter++;
 
                 if (!placeExists)
@@ -510,31 +314,33 @@ namespace ParadiseVille
                 }
             }
 
-            objTextDraw.TextWrite(dat.quartier, 30f, 50f, 20, Color.red);
-            objTextDraw.TextWrite("Canton", dat.canton, 30f, 130f, 14, Color.red);
-            objTextDraw.TextWrite("Villette", dat.villette, 30f, 180f, 14, Color.red);
+            objTextDraw.TextWrite(dat.quartier, 30f, 50f, 60, Color.red);
+            objTextDraw.TextWrite("Canton", dat.canton, 30f, 130f, 40, Color.red);
+            objTextDraw.TextWrite("Villette", dat.villette, 30f, 180f, 40, Color.red);
 
-            objTextDraw.TextWrite("COMMUNAUTÉ", 30f, 280f, 14, Color.red);
-            objTextDraw.TextWrite("Résidents", countResidents.ToString(), 30f, 340f, 12, Color.black);
-            objTextDraw.TextWrite("Employés", countEmployes.ToString(), 30f, 370f, 12, Color.black);
-            objTextDraw.TextWrite("Superficie", dat.square.ToString(), 30f, 400f, 12, Color.black);
-            objTextDraw.TextWrite("Densité repos", (Mathf.RoundToInt(countResidents / dat.square) * 100).ToString(), 30f, 430f, 12, Color.black);
-            objTextDraw.TextWrite("Densité actif", (Mathf.RoundToInt((countEmployes + (countResidents / 2)) / dat.square) * 100).ToString(), 30f, 460f, 12, Color.black);
-            objTextDraw.TextWrite("Député", Mathf.RoundToInt((countResidents + countEmployes) / (float)deputeDictictHabitans).ToString(), 30f, 490f, 12, Color.black);
+            objTextDraw.TextWrite("COMMUNAUTÉ", 30f, 280f, 40, Color.red);
+            objTextDraw.TextWrite("Résidents", countResidents.ToString(), 30f, 340f, 25, Color.black);
+            objTextDraw.TextWrite("Employés", countEmployes.ToString(), 30f, 370f, 25, Color.black);
+            objTextDraw.TextWrite("Superficie", dat.square.ToString(), 30f, 400f, 25, Color.black);
+            objTextDraw.TextWrite("Densité repos", (Mathf.RoundToInt(countResidents / dat.square) * 100).ToString(), 30f, 430f, 25, Color.black);
+            objTextDraw.TextWrite("Densité actif", (Mathf.RoundToInt((countEmployes + (countResidents / 2)) / dat.square) * 100).ToString(), 30f, 460f, 25, Color.black);
+            objTextDraw.TextWrite("Député", Mathf.RoundToInt((countResidents + countEmployes) / (float)deputeDictictHabitans).ToString(), 30f, 490f, 25, Color.black);
 
             if (employersExists)
             {
-                objTextDraw.TextWrite("EMPLOI", 30f, 550f, 14, Color.red);
+                objTextDraw.TextWrite("EMPLOI", 30f, 550f, 40, Color.red);
             }
 
             if (placeExists)
             {
-                objTextDraw.TextWrite("ESPACE PUBLIC", 400f, 400f, 12, Color.red);
+                objTextDraw.TextWrite("ESPACE PUBLIC", 400f, 280f, 40, Color.red);
             }
         }
 
         void CantonHandler(Ville canton)
         {
+            objTextDraw.TextClean();
+
             int cantonIndex = (int)canton;
             int cantonNextIndex = cantonIndex + 10;
 
@@ -612,16 +418,16 @@ namespace ParadiseVille
                 }
             }
 
-            objTextDraw.TextWrite(cantonName, 30f, 50f, 20, Color.red);
-            objTextDraw.TextWrite("Villette", villetteName, 30f, 140f, 14, Color.red);
+            objTextDraw.TextWrite(cantonName, 30f, 50f, 60, Color.red);
+            objTextDraw.TextWrite("Villette", villetteName, 30f, 140f, 40, Color.red);
 
-            objTextDraw.TextWrite("COMMUNAUTÉ", 30f, 280f, 14, Color.red);
-            objTextDraw.TextWrite("Résidents", countResidents.ToString(), 30f, 340f, 12, Color.black);
-            objTextDraw.TextWrite("Employés", countEmployers.ToString(), 30f, 370f, 12, Color.black);
-            objTextDraw.TextWrite("Superficie", squareCanton.ToString(), 30f, 400f, 12, Color.black);
-            objTextDraw.TextWrite("Densité repos", (Mathf.RoundToInt(countResidents / squareCanton) * 100).ToString(), 30f, 430f, 12, Color.black);
-            objTextDraw.TextWrite("Densité actif", (Mathf.RoundToInt((countEmployers + (countResidents / 2)) / squareCanton) * 100).ToString(), 30f, 460f, 12, Color.black);
-            objTextDraw.TextWrite("Député", localDepute.ToString(), 30f, 490f, 12, Color.black);
+            objTextDraw.TextWrite("COMMUNAUTÉ", 30f, 280f, 40, Color.red);
+            objTextDraw.TextWrite("Résidents", countResidents.ToString(), 30f, 340f, 25, Color.black);
+            objTextDraw.TextWrite("Employés", countEmployers.ToString(), 30f, 370f, 25, Color.black);
+            objTextDraw.TextWrite("Superficie", squareCanton.ToString(), 30f, 400f, 25, Color.black);
+            objTextDraw.TextWrite("Densité repos", (Mathf.RoundToInt(countResidents / squareCanton) * 100).ToString(), 30f, 430f, 25, Color.black);
+            objTextDraw.TextWrite("Densité actif", (Mathf.RoundToInt((countEmployers + (countResidents / 2)) / squareCanton) * 100).ToString(), 30f, 460f, 25, Color.black);
+            objTextDraw.TextWrite("Député", localDepute.ToString(), 30f, 490f, 25, Color.black);
 
             int[] social = new int[4]
             {
@@ -633,11 +439,11 @@ namespace ParadiseVille
 
             int[] socialPercent = PercentValuesGet(countResidents, social);
 
-            objTextDraw.TextWrite("SOCIÉTÉ", 30f, 560f, 14, Color.red);
-            objTextDraw.TextWrite("Ouvrier", social[0].ToString(), socialPercent[0], 30f, 600f, 12, Color.black);
-            objTextDraw.TextWrite("Spécialiste", social[1].ToString(), socialPercent[1], 30f, 630f, 12, Color.black);
-            objTextDraw.TextWrite("Professionnel", social[2].ToString(), socialPercent[2], 30f, 660f, 12, Color.black);
-            objTextDraw.TextWrite("Responsable", social[3].ToString(), socialPercent[3], 30f, 690f, 12, Color.black);
+            objTextDraw.TextWrite("SOCIÉTÉ", 30f, 560f, 40, Color.red);
+            objTextDraw.TextWrite("Ouvrier", social[0].ToString(), socialPercent[0], 30f, 600f, 25, Color.black);
+            objTextDraw.TextWrite("Spécialiste", social[1].ToString(), socialPercent[1], 30f, 630f, 25, Color.black);
+            objTextDraw.TextWrite("Professionnel", social[2].ToString(), socialPercent[2], 30f, 660f, 25, Color.black);
+            objTextDraw.TextWrite("Responsable", social[3].ToString(), socialPercent[3], 30f, 690f, 25, Color.black);
 
             int[] employ = new int[10]
             {
@@ -655,21 +461,23 @@ namespace ParadiseVille
 
             int[] employPercent = PercentValuesGet(countEmployers, employ);
 
-            objTextDraw.TextWrite("EMPLOI", 400f, 280f, 14, Color.red);
-            objTextDraw.TextWrite("Production", employ[0].ToString(), employPercent[0], 400f, 340f, 12, Color.black);
-            objTextDraw.TextWrite("Office", employ[1].ToString(), employPercent[1], 400f, 370f, 12, Color.black);
-            objTextDraw.TextWrite("Trade", employ[2].ToString(), employPercent[2], 400f, 400f, 12, Color.black);
-            objTextDraw.TextWrite("Culture", employ[3].ToString(), employPercent[3], 400f, 430f, 12, Color.black);
-            objTextDraw.TextWrite("Hotel", employ[4].ToString(), employPercent[4], 400f, 460f, 12, Color.black);
-            objTextDraw.TextWrite("Education", employ[5].ToString(), employPercent[5], 400f, 490f, 12, Color.black);
-            objTextDraw.TextWrite("Medicine", employ[6].ToString(), employPercent[6], 400f, 520f, 12, Color.black);
-            objTextDraw.TextWrite("Services", employ[7].ToString(), employPercent[7], 400f, 550f, 12, Color.black);
-            objTextDraw.TextWrite("Sport", employ[8].ToString(), employPercent[8], 400f, 580f, 12, Color.black);
-            objTextDraw.TextWrite("Administration", employ[9].ToString(), employPercent[9], 400f, 610f, 12, Color.black);
+            objTextDraw.TextWrite("EMPLOI", 400f, 280f, 40, Color.red);
+            objTextDraw.TextWrite("Production", employ[0].ToString(), employPercent[0], 400f, 340f, 25, Color.black);
+            objTextDraw.TextWrite("Office", employ[1].ToString(), employPercent[1], 400f, 370f, 25, Color.black);
+            objTextDraw.TextWrite("Trade", employ[2].ToString(), employPercent[2], 400f, 400f, 25, Color.black);
+            objTextDraw.TextWrite("Culture", employ[3].ToString(), employPercent[3], 400f, 430f, 25, Color.black);
+            objTextDraw.TextWrite("Hotel", employ[4].ToString(), employPercent[4], 400f, 460f, 25, Color.black);
+            objTextDraw.TextWrite("Education", employ[5].ToString(), employPercent[5], 400f, 490f, 25, Color.black);
+            objTextDraw.TextWrite("Medicine", employ[6].ToString(), employPercent[6], 400f, 520f, 25, Color.black);
+            objTextDraw.TextWrite("Services", employ[7].ToString(), employPercent[7], 400f, 550f, 25, Color.black);
+            objTextDraw.TextWrite("Sport", employ[8].ToString(), employPercent[8], 400f, 580f, 25, Color.black);
+            objTextDraw.TextWrite("Administration", employ[9].ToString(), employPercent[9], 400f, 610f, 25, Color.black);
         }
 
         void VilletteHandler(Ville villette)
         {
+            objTextDraw.TextClean();
+
             int villetteIndex = (int)villette;
             int villetteNextIndex = villetteIndex + 100;
 
@@ -678,6 +486,7 @@ namespace ParadiseVille
             float squareVillette = 0f;
             int countResidents = 0;
             int countEmployers = 0;
+            int localDepute = 0;
 
             Dictionary<SocialState, int> residentsDictionary = new Dictionary<SocialState, int>();
             Dictionary<EmployerType, int> employersDictionary = new Dictionary<EmployerType, int>();
@@ -702,6 +511,9 @@ namespace ParadiseVille
 
                     squareVillette += dat.square;
 
+                    int quartierHabitans = 0;
+                    int quartierEmployers = 0;
+
                     if (villetteName == "")
                     {
                         villetteName = dat.villette;
@@ -722,6 +534,7 @@ namespace ParadiseVille
 
                         residentsDictionary[home.social] += habitans;
                         countResidents += habitans;
+                        quartierHabitans += habitans;
                     }
 
                     foreach (EmployerType employers in allEmployerTypes)
@@ -732,19 +545,23 @@ namespace ParadiseVille
                         {
                             countEmployers += employersInGroup;
                             employersDictionary[employers] += employersInGroup;
+                            quartierEmployers += employersInGroup;
                         }
                     }
+
+                    localDepute += Mathf.RoundToInt((quartierHabitans + quartierEmployers) / (float)deputeDictictHabitans);
                 }
             }
 
-            objTextDraw.TextWrite(villetteName, 30f, 50f, 20, Color.red);
+            objTextDraw.TextWrite(villetteName, 30f, 50f, 60, Color.red);
 
-            objTextDraw.TextWrite("COMMUNAUTÉ", 30f, 280f, 14, Color.red);
-            objTextDraw.TextWrite("Résidents", countResidents.ToString(), 30f, 340f, 12, Color.black);
-            objTextDraw.TextWrite("Employés", countEmployers.ToString(), 30f, 370f, 12, Color.black);
-            objTextDraw.TextWrite("Superficie", squareVillette.ToString(), 30f, 400f, 12, Color.black);
-            objTextDraw.TextWrite("Densité repos", (Mathf.RoundToInt(countResidents / squareVillette) * 100).ToString(), 30f, 430f, 12, Color.black);
-            objTextDraw.TextWrite("Densité actif", (Mathf.RoundToInt((countEmployers + (countResidents / 2)) / squareVillette) * 100).ToString(), 30f, 460f, 12, Color.black);
+            objTextDraw.TextWrite("COMMUNAUTÉ", 30f, 280f, 40, Color.red);
+            objTextDraw.TextWrite("Résidents", countResidents.ToString(), 30f, 340f, 25, Color.black);
+            objTextDraw.TextWrite("Employés", countEmployers.ToString(), 30f, 370f, 25, Color.black);
+            objTextDraw.TextWrite("Superficie", squareVillette.ToString(), 30f, 400f, 25, Color.black);
+            objTextDraw.TextWrite("Densité repos", (Mathf.RoundToInt(countResidents / squareVillette) * 100).ToString(), 30f, 430f, 25, Color.black);
+            objTextDraw.TextWrite("Densité actif", (Mathf.RoundToInt((countEmployers + (countResidents / 2)) / squareVillette) * 100).ToString(), 30f, 460f, 25, Color.black);
+            objTextDraw.TextWrite("Député", localDepute.ToString(), 30f, 490f, 25, Color.black);
 
             int[] social = new int[4]
             {
@@ -756,11 +573,11 @@ namespace ParadiseVille
 
             int[] socialPercent = PercentValuesGet(countResidents, social);
 
-            objTextDraw.TextWrite("SOCIÉTÉ", 30f, 560f, 14, Color.red);
-            objTextDraw.TextWrite("Ouvrier", social[0].ToString(), socialPercent[0], 30f, 620f, 12, Color.black);
-            objTextDraw.TextWrite("Spécialiste", social[1].ToString(), socialPercent[1], 30f, 650f, 12, Color.black);
-            objTextDraw.TextWrite("Professionnel", social[2].ToString(), socialPercent[2], 30f, 680f, 12, Color.black);
-            objTextDraw.TextWrite("Responsable", social[3].ToString(), socialPercent[3], 30f, 710f, 12, Color.black);
+            objTextDraw.TextWrite("SOCIÉTÉ", 30f, 560f, 40, Color.red);
+            objTextDraw.TextWrite("Ouvrier", social[0].ToString(), socialPercent[0], 30f, 620f, 25, Color.black);
+            objTextDraw.TextWrite("Spécialiste", social[1].ToString(), socialPercent[1], 30f, 650f, 25, Color.black);
+            objTextDraw.TextWrite("Professionnel", social[2].ToString(), socialPercent[2], 30f, 680f, 25, Color.black);
+            objTextDraw.TextWrite("Responsable", social[3].ToString(), socialPercent[3], 30f, 710f, 25, Color.black);
 
             int[] employ = new int[10]
             {
@@ -778,24 +595,27 @@ namespace ParadiseVille
 
             int[] employPercent = PercentValuesGet(countEmployers, employ);
 
-            objTextDraw.TextWrite("EMPLOI", 400f, 280f, 14, Color.red);
-            objTextDraw.TextWrite("Production", employ[0].ToString(), employPercent[0], 400f, 340f, 12, Color.black);
-            objTextDraw.TextWrite("Office", employ[1].ToString(), employPercent[1], 400f, 370f, 12, Color.black);
-            objTextDraw.TextWrite("Trade", employ[2].ToString(), employPercent[2], 400f, 400f, 12, Color.black);
-            objTextDraw.TextWrite("Culture", employ[3].ToString(), employPercent[3], 400f, 430f, 12, Color.black);
-            objTextDraw.TextWrite("Hotel", employ[4].ToString(), employPercent[4], 400f, 460f, 12, Color.black);
-            objTextDraw.TextWrite("Education", employ[5].ToString(), employPercent[5], 400f, 490f, 12, Color.black);
-            objTextDraw.TextWrite("Medicine", employ[6].ToString(), employPercent[6], 400f, 520f, 12, Color.black);
-            objTextDraw.TextWrite("Services", employ[7].ToString(), employPercent[7], 400f, 550f, 12, Color.black);
-            objTextDraw.TextWrite("Sport", employ[8].ToString(), employPercent[8], 400f, 580f, 12, Color.black);
-            objTextDraw.TextWrite("Administration", employ[9].ToString(), employPercent[9], 400f, 610f, 12, Color.black);
+            objTextDraw.TextWrite("EMPLOI", 400f, 280f, 40, Color.red);
+            objTextDraw.TextWrite("Production", employ[0].ToString(), employPercent[0], 400f, 340f, 25, Color.black);
+            objTextDraw.TextWrite("Office", employ[1].ToString(), employPercent[1], 400f, 370f, 25, Color.black);
+            objTextDraw.TextWrite("Trade", employ[2].ToString(), employPercent[2], 400f, 400f, 25, Color.black);
+            objTextDraw.TextWrite("Culture", employ[3].ToString(), employPercent[3], 400f, 430f, 25, Color.black);
+            objTextDraw.TextWrite("Hotel", employ[4].ToString(), employPercent[4], 400f, 460f, 25, Color.black);
+            objTextDraw.TextWrite("Education", employ[5].ToString(), employPercent[5], 400f, 490f, 25, Color.black);
+            objTextDraw.TextWrite("Medicine", employ[6].ToString(), employPercent[6], 400f, 520f, 25, Color.black);
+            objTextDraw.TextWrite("Services", employ[7].ToString(), employPercent[7], 400f, 550f, 25, Color.black);
+            objTextDraw.TextWrite("Sport", employ[8].ToString(), employPercent[8], 400f, 580f, 25, Color.black);
+            objTextDraw.TextWrite("Administration", employ[9].ToString(), employPercent[9], 400f, 610f, 25, Color.black);
         }
 
         void VillHandler()
         {
+            objTextDraw.TextClean();
+
             float squareVille = 0f;
             int countResidents = 0;
             int countEmployers = 0;
+            int localDepute = 0;
 
             Dictionary<SocialState, int> residentsDictionary = new Dictionary<SocialState, int>();
             Dictionary<EmployerType, int> employersDictionary = new Dictionary<EmployerType, int>();
@@ -818,6 +638,9 @@ namespace ParadiseVille
 
                     squareVille += dat.square;
 
+                    int quartierHabitans = 0;
+                    int quartierEmployers = 0;
+
                     foreach (HomeData home in dat.homeDataList)
                     {
                         int homeSize = 0;
@@ -833,6 +656,7 @@ namespace ParadiseVille
 
                         residentsDictionary[home.social] += habitans;
                         countResidents += habitans;
+                        quartierHabitans += habitans;
                     }
 
                     foreach (EmployerType employers in allEmployerTypes)
@@ -843,19 +667,23 @@ namespace ParadiseVille
                         {
                             countEmployers += employersInGroup;
                             employersDictionary[employers] += employersInGroup;
+                            quartierEmployers += employersInGroup;
                         }
                     }
+
+                    localDepute += Mathf.RoundToInt((quartierHabitans + quartierEmployers) / (float)deputeDictictHabitans);
                 }
             }
 
-            objTextDraw.TextWrite("PARADISE", 30f, 50f, 20, Color.red);
+            objTextDraw.TextWrite("PARADISE", 30f, 50f, 60, Color.red);
 
-            objTextDraw.TextWrite("COMMUNAUTÉ", 30f, 280f, 14, Color.red);
-            objTextDraw.TextWrite("Résidents", countResidents.ToString(), 30f, 340f, 12, Color.black);
-            objTextDraw.TextWrite("Employés", countEmployers.ToString(), 30f, 370f, 12, Color.black);
-            objTextDraw.TextWrite("Superficie", squareVille.ToString(), 30f, 400f, 12, Color.black);
-            objTextDraw.TextWrite("Densité repos", (Mathf.RoundToInt(countResidents / squareVille) * 100).ToString(), 30f, 430f, 12, Color.black);
-            objTextDraw.TextWrite("Densité actif", (Mathf.RoundToInt((countEmployers + (countResidents / 2)) / squareVille) * 100).ToString(), 30f, 460f, 12, Color.black);
+            objTextDraw.TextWrite("COMMUNAUTÉ", 30f, 280f, 40, Color.red);
+            objTextDraw.TextWrite("Résidents", countResidents.ToString(), 30f, 340f, 25, Color.black);
+            objTextDraw.TextWrite("Employés", countEmployers.ToString(), 30f, 370f, 25, Color.black);
+            objTextDraw.TextWrite("Superficie", squareVille.ToString(), 30f, 400f, 25, Color.black);
+            objTextDraw.TextWrite("Densité repos", (Mathf.RoundToInt(countResidents / squareVille) * 100).ToString(), 30f, 430f, 25, Color.black);
+            objTextDraw.TextWrite("Densité actif", (Mathf.RoundToInt((countEmployers + (countResidents / 2)) / squareVille) * 100).ToString(), 30f, 460f, 25, Color.black);
+            objTextDraw.TextWrite("Député", localDepute.ToString(), 30f, 490f, 25, Color.black);
 
             int[] social = new int[4]
             {
@@ -867,11 +695,11 @@ namespace ParadiseVille
 
             int[] socialPercent = PercentValuesGet(countResidents, social);
 
-            objTextDraw.TextWrite("SOCIÉTÉ", 30f, 560f, 14, Color.red);
-            objTextDraw.TextWrite("Ouvrier", social[0].ToString(), socialPercent[0], 30f, 620f, 12, Color.black);
-            objTextDraw.TextWrite("Spécialiste", social[1].ToString(), socialPercent[1], 30f, 650f, 12, Color.black);
-            objTextDraw.TextWrite("Professionnel", social[2].ToString(), socialPercent[2], 30f, 680f, 12, Color.black);
-            objTextDraw.TextWrite("Responsable", social[3].ToString(), socialPercent[3], 30f, 710f, 12, Color.black);
+            objTextDraw.TextWrite("SOCIÉTÉ", 30f, 560f, 40, Color.red);
+            objTextDraw.TextWrite("Ouvrier", social[0].ToString(), socialPercent[0], 30f, 620f, 25, Color.black);
+            objTextDraw.TextWrite("Spécialiste", social[1].ToString(), socialPercent[1], 30f, 650f, 25, Color.black);
+            objTextDraw.TextWrite("Professionnel", social[2].ToString(), socialPercent[2], 30f, 680f, 25, Color.black);
+            objTextDraw.TextWrite("Responsable", social[3].ToString(), socialPercent[3], 30f, 710f, 25, Color.black);
 
             int[] employ = new int[10]
             {
@@ -889,17 +717,17 @@ namespace ParadiseVille
 
             int[] employPercent = PercentValuesGet(countEmployers, employ);
 
-            objTextDraw.TextWrite("EMPLOI", 400f, 280f, 14, Color.red);
-            objTextDraw.TextWrite("Production", employ[0].ToString(), employPercent[0], 400f, 340f, 12, Color.black);
-            objTextDraw.TextWrite("Office", employ[1].ToString(), employPercent[1], 400f, 370f, 12, Color.black);
-            objTextDraw.TextWrite("Trade", employ[2].ToString(), employPercent[2], 400f, 400f, 12, Color.black);
-            objTextDraw.TextWrite("Culture", employ[3].ToString(), employPercent[3], 400f, 430f, 12, Color.black);
-            objTextDraw.TextWrite("Hotel", employ[4].ToString(), employPercent[4], 400f, 460f, 12, Color.black);
-            objTextDraw.TextWrite("Education", employ[5].ToString(), employPercent[5], 400f, 490f, 12, Color.black);
-            objTextDraw.TextWrite("Medicine", employ[6].ToString(), employPercent[6], 400f, 520f, 12, Color.black);
-            objTextDraw.TextWrite("Services", employ[7].ToString(), employPercent[7], 400f, 550f, 12, Color.black);
-            objTextDraw.TextWrite("Sport", employ[8].ToString(), employPercent[8], 400f, 580f, 12, Color.black);
-            objTextDraw.TextWrite("Administration", employ[9].ToString(), employPercent[9], 400f, 610f, 12, Color.black);
+            objTextDraw.TextWrite("EMPLOI", 400f, 280f, 40, Color.red);
+            objTextDraw.TextWrite("Production", employ[0].ToString(), employPercent[0], 400f, 340f, 25, Color.black);
+            objTextDraw.TextWrite("Office", employ[1].ToString(), employPercent[1], 400f, 370f, 25, Color.black);
+            objTextDraw.TextWrite("Trade", employ[2].ToString(), employPercent[2], 400f, 400f, 25, Color.black);
+            objTextDraw.TextWrite("Culture", employ[3].ToString(), employPercent[3], 400f, 430f, 25, Color.black);
+            objTextDraw.TextWrite("Hotel", employ[4].ToString(), employPercent[4], 400f, 460f, 25, Color.black);
+            objTextDraw.TextWrite("Education", employ[5].ToString(), employPercent[5], 400f, 490f, 25, Color.black);
+            objTextDraw.TextWrite("Medicine", employ[6].ToString(), employPercent[6], 400f, 520f, 25, Color.black);
+            objTextDraw.TextWrite("Services", employ[7].ToString(), employPercent[7], 400f, 550f, 25, Color.black);
+            objTextDraw.TextWrite("Sport", employ[8].ToString(), employPercent[8], 400f, 580f, 25, Color.black);
+            objTextDraw.TextWrite("Administration", employ[9].ToString(), employPercent[9], 400f, 610f, 25, Color.black);
         }
 
         private int[] PercentValuesGet(int total, params int[] dataArray)
@@ -972,7 +800,7 @@ namespace ParadiseVille
                             currentPercentCount -= 1;
                         }
 
-                        if(loop >= 5)
+                        if(loop >= 10)
                         {
                             Debug.Log("error cycle while");
                             return arrPercents;
@@ -984,6 +812,46 @@ namespace ParadiseVille
             }
             else
                 return new int[0];
+        }
+
+        public void CalcEmployersPerUnit()
+        {
+            int employersCount = 0;
+            int employersUnit = 0;
+            int workPlaceUnit = 0;
+
+            foreach (Ville quartier in allQuarties)
+            {
+                if ((int)quartier % 10 != 0 /*&& (int)quartier < 200*/)
+                {
+                    DistrictData dat = DataVille.Information(quartier);
+
+                    foreach (HomeData home in dat.homeDataList)
+                    {
+                        int homeSize = 0;
+                        int homeCount = home.appartaments.Length;
+
+                        for (int i = 0; i < homeCount; i++)
+                        {
+                            homeSize += home.appartaments[i];
+                        }
+
+                        employersCount += home.count * homeSize;
+                        employersUnit += home.count * home.size;
+                    }
+
+                    foreach (EmployerType employers in allEmployerTypes)
+                    {
+                        workPlaceUnit += dat.employersDataDictionary[employers];
+                    }
+                }
+            }
+
+            Debug.Log("count = " + employersCount.ToString() 
+                + " unit = " + employersUnit.ToString()
+                + " work unit = " + workPlaceUnit.ToString() 
+                + " work places = " + (workPlaceUnit / (float)employersUnit).ToString()
+                + " employers per unit = " + (employersCount / (float)employersUnit).ToString());
         }
     }
 }

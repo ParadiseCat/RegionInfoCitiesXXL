@@ -81,7 +81,7 @@ namespace ParadiseVille
                 }
                 case Ville.q_Riveciel: {
                     dat = new DistrictData("RIVECIEL", "Cœurville", "Fleurville", 10.4f);
-                    dat.HomeDataAdd("Rou", SocialState.Specialist, 2, 65, new int[4] { 0, 4, 4, 2 });
+                    dat.HomeDataAdd("Rou", SocialState.Specialist, 2, 64, new int[4] { 0, 4, 4, 2 });
                     dat.EmployersDataAdd(EmployerType.Hotel, 1 * 4);
                     dat.EmployersDataAdd(EmployerType.Trade, 1 * 6);
                     dat.PlaceDataAdd("Palais de la famille", "Quai céleste", "Boulevard des Saints");
@@ -91,7 +91,7 @@ namespace ParadiseVille
                 }
                 case Ville.q_Eclaires: {
                     dat = new DistrictData("ÉCLAIRÉS", "Cœurville", "Fleurville", 7.2f);
-                    dat.HomeDataAdd("Rou", SocialState.Specialist, 2, 65, new int[4] { 0, 4, 4, 2 });
+                    dat.HomeDataAdd("Rou", SocialState.Specialist, 2, 42, new int[4] { 0, 4, 4, 2 });
                     dat.EmployersDataAdd(EmployerType.Education, 1 * 6);
                     dat.EmployersDataAdd(EmployerType.Office, 1 * 4);
                     dat.PlaceDataAdd("Synagogue de Bonheur", "Boulevard d'Amour", "Banque près de la Synagogue");

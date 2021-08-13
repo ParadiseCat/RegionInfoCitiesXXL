@@ -17,6 +17,11 @@ namespace ParadiseVille
         Mode mode;
         Rect[] buttonRects;
 
+        int buttonFontSize = 25;
+
+        Color defaultButtonColor;
+        Color selectButtonColor;
+
         void Start()
         {
             objMap = new GameMap();
@@ -25,38 +30,34 @@ namespace ParadiseVille
             objTextureMap = new GameMap();
             objDataHandler = new DataHandler(Mode.Ville);
 
+            Vector2 start = new Vector2(500f, 30f);
+            Vector2 button = new Vector2(120f, 60f);
+            float distance = 10f;
+
             buttonRects = new Rect[4]
             {
-                GetScaleRect(450f, 30f, 100f, 60f), 
-                GetScaleRect(560f, 30f, 100f, 60f),
-                GetScaleRect(450f, 120f, 100f, 60f),
-                GetScaleRect(560f, 120f, 100f, 60f)
+                GetScaleRect(start.x, start.y, button.x, button.y), 
+                GetScaleRect(start.x + button.x + distance, start.y, button.x, button.y),
+                GetScaleRect(start.x, start.y + button.y + distance, button.x, button.y),
+                GetScaleRect(start.x + button.x + distance, start.y + button.y + distance, button.x, button.y)
             };
-                
+
+            defaultButtonColor = new Color(0.1f, 0.7f, 0.9f);
+            selectButtonColor = new Color(1.0f, 0.3f, 0.2f);
+
             SetModeMap(Mode.Ville);
         }
 
         public void OnGUI()
         {
-            if (GUI.Button(buttonRects[0], "Ville"))
-            {
-                if(mode != Mode.Ville) SetModeMap(Mode.Ville);
-            }
+            GUIStyle buttonStyle = new GUIStyle(GUI.skin.button);
+            buttonStyle.fontSize = Mathf.RoundToInt(buttonFontSize * GameCamera.scaleCamera);
+            buttonStyle.padding = new RectOffset(0, 0, 0, 0);
 
-            if (GUI.Button(buttonRects[1], "Villette"))
-            {
-                if (mode != Mode.Villette) SetModeMap(Mode.Villette);
-            }
-
-            if (GUI.Button(buttonRects[2], "Canton"))
-            {
-                if (mode != Mode.Canton) SetModeMap(Mode.Canton);
-            }
-
-            if (GUI.Button(buttonRects[3], "Quartier"))
-            {
-                if (mode != Mode.Quartier) SetModeMap(Mode.Quartier);
-            }
+            GUIButtonDraw(buttonRects[0], "Ville", buttonStyle, Mode.Ville);
+            GUIButtonDraw(buttonRects[1], "Villette", buttonStyle,  Mode.Villette);
+            GUIButtonDraw(buttonRects[2], "Canton", buttonStyle, Mode.Canton);
+            GUIButtonDraw(buttonRects[3], "Quartier", buttonStyle, Mode.Quartier);
         }
 
         void Update()
@@ -65,12 +66,20 @@ namespace ParadiseVille
             {
                 Vector3 inputMouse = Input.mousePosition;
                 hexColor = objTextureMap.GetTexturePixel(ref inputMouse.x, ref inputMouse.y);
-                objDataHandler.ShowData(mode, hexColor);
+
+                if (hexColor != "")
+                {
+                    objDataHandler.ShowData(mode, hexColor);
+                }
             }
             else if (Input.GetKeyDown(KeyCode.Space))
             {
                 int pixelCount = objTextureMap.GetPixelCount(ref hexColor);
                 CalcRegionSquare(mapX, objTextureMap.GetTextureWidth(), pixelCount);
+            }
+            else if (Input.GetKeyDown(KeyCode.Backspace))
+            {
+                objDataHandler.CalcEmployersPerUnit();
             }
             else if (Input.GetKeyDown(KeyCode.Escape))
             {
@@ -86,30 +95,57 @@ namespace ParadiseVille
 
         void SetModeMap(Mode modeType)
         {
-            mode = modeType;
-            objTextureMap.ObjectReset();
-
-            if (mode == Mode.Ville)
+            if (mode != modeType)
             {
-                objDataHandler.ShowData(mode, "FFFFFF");
+                mode = modeType;
+                objTextureMap.ObjectReset();
+
+                switch (mode)
+                {
+                    case Mode.Ville: {
+                        objDataHandler.ShowData(mode, "FFFFFF");
+                        break;
+                    }
+                    case Mode.Villette:
+                    {
+                        objDataHandler.ShowData(mode, "FCFF84");
+                        ShowTexturedSprite("villette");
+                        break;
+                    }
+                    case Mode.Canton: {
+                        objDataHandler.ShowData(mode, "0BC373");
+                        ShowTexturedSprite("canton");
+                        break;
+                    }
+                    case Mode.Quartier: {
+                        objDataHandler.ShowData(mode, "B5FF00");
+                        ShowTexturedSprite("quartier");
+                        break;
+                    }
+                }
+            }
+
+            void ShowTexturedSprite(string dataFile)
+            {
+                objTextureMap.ObjectSpriteCreate(GameCamera.cameraHalf_Width - 512f, 0f, dataFile, 1);
+                objTextureMap.TextureExtractFromSprite(dataFile);
+            }
+        }
+
+        void GUIButtonDraw(Rect position, string text, GUIStyle style, Mode modeVilleAction)
+        {
+            if (modeVilleAction == mode)
+            {
+                GUI.color = selectButtonColor;
             }
             else
             {
-                string dataFile = "quartier";
+                GUI.color = defaultButtonColor;
+            }
 
-                if (mode == Mode.Canton)
-                {
-                    dataFile = "canton";
-                }
-                else if (mode == Mode.Villette)
-                {
-                    dataFile = "villette";
-                }
-
-                objTextureMap.ObjectSpriteCreate(GameCamera.cameraHalf_Width - 512f, 0f, dataFile, 1);
-                objTextureMap.TextureExtractFromSprite(dataFile);
-
-                objDataHandler.ShowData(mode, "FFFFFF");
+            if (GUI.Button(position, text, style))
+            {
+                SetModeMap(modeVilleAction);
             }
         }
 
