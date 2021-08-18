@@ -7,25 +7,41 @@ namespace ParadiseVille
     /// </summary>
     public class GameController : MonoBehaviour
     {
+        public static GameController instance;
+
         GameMap objMap;
         GameMap objTextureMap;
         DataHandler objDataHandler;
+
+        GameObject tramMenu;
+
+        bool tramShow = false;
 
         string hexColor;
 
         const int mapX = 10000;
         Mode mode;
+        Mode textureMode;
         Rect[] buttonRects;
 
         int buttonFontSize = 25;
 
         Color defaultButtonColor;
         Color selectButtonColor;
+        Color tramButtonColor;
+
+        private void Awake()
+        {
+            if (instance == null)
+            {
+                instance = this;
+            }
+        }
 
         void Start()
         {
             objMap = new GameMap();
-            objMap.ObjectSpriteCreate(GameCamera.cameraHalf_Width - 512f, 0f, "ville", 0);
+            objMap.ObjectSpriteCreate("objMap", GameCamera.cameraHalf_Width - 512f, 0f, "ville", 0);
 
             objTextureMap = new GameMap();
             objDataHandler = new DataHandler(Mode.Ville);
@@ -34,18 +50,20 @@ namespace ParadiseVille
             Vector2 button = new Vector2(120f, 60f);
             float distance = 10f;
 
-            buttonRects = new Rect[4]
+            buttonRects = new Rect[5]
             {
-                GetScaleRect(start.x, start.y, button.x, button.y), 
-                GetScaleRect(start.x + button.x + distance, start.y, button.x, button.y),
-                GetScaleRect(start.x, start.y + button.y + distance, button.x, button.y),
-                GetScaleRect(start.x + button.x + distance, start.y + button.y + distance, button.x, button.y)
+                GetScaleRect(start.x, start.y, button.x, button.y, distance, 0, 0),
+                GetScaleRect(start.x, start.y, button.x, button.y, distance, 0, 1),
+                GetScaleRect(start.x, start.y, button.x, button.y, distance, 1, 0),
+                GetScaleRect(start.x, start.y, button.x, button.y, distance, 1, 1),
+                GetScaleRect(start.x, start.y, button.x, button.y, distance, 0, 2)
             };
 
             defaultButtonColor = new Color(0.1f, 0.7f, 0.9f);
             selectButtonColor = new Color(1.0f, 0.3f, 0.2f);
+            tramButtonColor = new Color(1.0f, 1.0f, 0f);
 
-            SetModeMap(Mode.Ville);
+            SetModeMap(Mode.Ville, false);
         }
 
         public void OnGUI()
@@ -58,6 +76,7 @@ namespace ParadiseVille
             GUIButtonDraw(buttonRects[1], "Villette", buttonStyle,  Mode.Villette);
             GUIButtonDraw(buttonRects[2], "Canton", buttonStyle, Mode.Canton);
             GUIButtonDraw(buttonRects[3], "Quartier", buttonStyle, Mode.Quartier);
+            GUIButtonDraw(buttonRects[4], "Tram", buttonStyle, Mode.Tram);
         }
 
         void Update()
@@ -69,7 +88,7 @@ namespace ParadiseVille
 
                 if (hexColor != "")
                 {
-                    objDataHandler.ShowData(mode, hexColor);
+                    objDataHandler.ShowData(mode, hexColor, false);
                 }
             }
             else if (Input.GetKeyDown(KeyCode.Space))
@@ -80,6 +99,10 @@ namespace ParadiseVille
             else if (Input.GetKeyDown(KeyCode.Backspace))
             {
                 objDataHandler.CalcEmployersPerUnit();
+            }
+            else if (Input.GetKeyDown(KeyCode.RightShift))
+            {
+                // for test
             }
             else if (Input.GetKeyDown(KeyCode.Escape))
             {
@@ -93,9 +116,9 @@ namespace ParadiseVille
             Debug.Log("Color is: " + hexColor + " pCnt: " + pixelCount.ToString() + " => " + sq.ToString());
         }
 
-        void SetModeMap(Mode modeType)
+        void SetModeMap(Mode modeType, bool reset)
         {
-            if (mode != modeType)
+            if (textureMode != modeType)
             {
                 mode = modeType;
                 objTextureMap.ObjectReset();
@@ -103,23 +126,43 @@ namespace ParadiseVille
                 switch (mode)
                 {
                     case Mode.Ville: {
-                        objDataHandler.ShowData(mode, "FFFFFF");
+                        textureMode = mode;
+                        if (!tramShow) objDataHandler.ShowData(mode, "FFFFFF", reset);
                         break;
                     }
-                    case Mode.Villette:
-                    {
-                        objDataHandler.ShowData(mode, "FCFF84");
+                    case Mode.Villette: {
+                        textureMode = mode;
+                        if (!tramShow) objDataHandler.ShowData(mode, "FCFF84", reset);
                         ShowTexturedSprite("villette");
                         break;
                     }
                     case Mode.Canton: {
-                        objDataHandler.ShowData(mode, "0BC373");
+                        textureMode = mode;
+                        if (!tramShow) objDataHandler.ShowData(mode, "0BC274", reset);
                         ShowTexturedSprite("canton");
                         break;
                     }
                     case Mode.Quartier: {
-                        objDataHandler.ShowData(mode, "B5FF00");
+                        textureMode = mode;
+                        if (!tramShow) objDataHandler.ShowData(mode, "B6FF00", reset);
                         ShowTexturedSprite("quartier");
+                        break;
+                    }
+                    case Mode.Tram: {
+                        if (!tramShow)
+                        {
+                            tramShow = true;
+                            ShowTramMenu();
+                            objDataHandler.ResetData();
+                        }
+                        else
+                        {
+                            tramShow = false;
+                            HideTramMenu();
+                            Mode current = textureMode;
+                            textureMode = Mode.None;
+                            SetModeMap(current, true);
+                        }
                         break;
                     }
                 }
@@ -127,14 +170,14 @@ namespace ParadiseVille
 
             void ShowTexturedSprite(string dataFile)
             {
-                objTextureMap.ObjectSpriteCreate(GameCamera.cameraHalf_Width - 512f, 0f, dataFile, 1);
+                objTextureMap.ObjectSpriteCreate("objMapData", GameCamera.cameraHalf_Width - 512f, 0f, dataFile, 1);
                 objTextureMap.TextureExtractFromSprite(dataFile);
             }
         }
 
         void GUIButtonDraw(Rect position, string text, GUIStyle style, Mode modeVilleAction)
         {
-            if (modeVilleAction == mode)
+            if (modeVilleAction == textureMode)
             {
                 GUI.color = selectButtonColor;
             }
@@ -143,15 +186,36 @@ namespace ParadiseVille
                 GUI.color = defaultButtonColor;
             }
 
+            if (modeVilleAction == Mode.Tram && tramShow)
+            {
+                GUI.color = tramButtonColor;
+            }
+
             if (GUI.Button(position, text, style))
             {
-                SetModeMap(modeVilleAction);
+                SetModeMap(modeVilleAction, false);
             }
         }
 
-        Rect GetScaleRect(float x, float y, float w, float h)
+        Rect GetScaleRect(float x, float y, float w, float h, float dist, int posX, int posY)
         {
-            return new Rect(x * GameCamera.scaleCamera, y * GameCamera.scaleCamera, w * GameCamera.scaleCamera, h * GameCamera.scaleCamera);
+            return new Rect(
+                (x + posX * (w + dist)) * GameCamera.scaleCamera, 
+                (y + posY * (h + dist)) * GameCamera.scaleCamera, 
+                w * GameCamera.scaleCamera, 
+                h * GameCamera.scaleCamera);
+        }
+
+        void ShowTramMenu()
+        {
+            tramMenu = new GameObject("objTramMenu");
+            TramMenu tramComponent = tramMenu.AddComponent<TramMenu>();
+            tramComponent.drawLineXstart = GameCamera.cameraHalf_Width - 512f;
+        }
+
+        void HideTramMenu()
+        {
+            Destroy(tramMenu);
         }
     }
 }

@@ -22,7 +22,9 @@ namespace ParadiseVille
         Quartier, 
         Canton, 
         Villette, 
-        Ville 
+        Ville,
+        Tram,
+        None
     };
 
     /// <summary>
@@ -108,11 +110,13 @@ namespace ParadiseVille
         v_Montville = 300,
             c_Roquerie = 310,
                 q_Nichoir = 311,
-                q_Trefleblue = 312,
+                q_Horizon = 312,
+                q_Genievre = 313,
             c_Ravinlis = 320,
                 q_Paysage = 321,
                 q_Croissance = 322,
                 q_Tilleul = 323,
+                q_Trefleblue = 324,
             c_Liberte = 330,
                 q_Enchanteur = 331,
                 q_Sublimite = 332,
@@ -173,5 +177,44 @@ namespace ParadiseVille
             c_Phare = 750,
                 q_Tissage = 751,
                 q_Port = 752
+    }
+
+    /// <summary>
+    /// List of points for public stations
+    /// </summary>
+    public enum Station
+    {
+        Gareroutiere,
+        Royaume,
+        Royaume_c1,
+        Royaume_c2,
+        Vitalite,
+        Theater,
+        Halles,
+        Bonheur,
+        Bonheur_c1,
+        Bonheur_c2,
+        Familie,
+        Familie_c1,
+        Hotel,
+        Passage,
+        Passage_c1,
+        Governeur,
+        Governeur_c1,
+        Roifrenaie,
+        Roifrenaie_c1,
+        Sinodroine,
+        Sinodroine_c1,
+        Sinodroine_c2,
+        Montfleur
+    }
+
+    /// <summary>
+    /// List of tram routes
+    /// </summary>
+    public enum Routier
+    {
+        Route_21,
+        None
     }
 }

@@ -30,11 +30,11 @@ namespace ParadiseVille
             }
         }
 
-        public GameObject ObjectSpriteCreate(float xpos, float ypos, string source, int order)
+        public GameObject ObjectSpriteCreate(string name, float xpos, float ypos, string source, int order)
         {
             if (objMap != null) Object.Destroy(objMap);
 
-            objMap = new GameObject("objMap");
+            objMap = new GameObject(name);
 
             objMap.transform.position = new Vector3(xpos, ypos);
 
@@ -105,7 +105,8 @@ namespace ParadiseVille
                     Color32 col = objTexture.GetPixel(px, py);
                     string colHex = col.r.ToString("X2") + col.g.ToString("X2") + col.b.ToString("X2");
 
-                    Debug.Log("color map x=" + px + " y=" + py + " HEX = " + colHex);
+                    Debug.Log("color map  mx=" + mouseX.ToString() + " my=" + mouseY.ToString() + 
+                        " x=" + px + " y=" + py + " HEX = " + colHex);
                     return colHex;
                 }
                 else

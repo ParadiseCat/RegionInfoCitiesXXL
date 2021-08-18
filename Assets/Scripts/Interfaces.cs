@@ -7,7 +7,7 @@ namespace ParadiseVille
     /// </summary>
     interface ISprite
     {
-        public GameObject ObjectSpriteCreate(float xpos, float ypos, string source, int order);
+        public GameObject ObjectSpriteCreate(string name, float xpos, float ypos, string source, int order);
     }
 
     /// <summary>

@@ -63,10 +63,11 @@
     <Compile Include="Assets\Scripts\CityData.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\TextDraw.cs" />
+    <Compile Include="Assets\Scripts\DataStructs.cs" />
     <Compile Include="Assets\Scripts\StaticData.cs" />
     <Compile Include="Assets\Scripts\GameMap.cs" />
     <Compile Include="Assets\Scripts\Interfaces.cs" />
-    <Compile Include="Assets\Scripts\DataStructs.cs" />
+    <Compile Include="Assets\Scripts\TramMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -349,6 +349,7 @@
 "Assets/Scripts/Interfaces.cs"
 "Assets/Scripts/StaticData.cs"
 "Assets/Scripts/TextDraw.cs"
+"Assets/Scripts/TramMenu.cs"
 -langversion:8.0
 
 /deterministic

@@ -23,6 +23,16 @@ namespace ParadiseVille
             listTextObjects = new List<GameObject>();
         }
 
+        public void Destroy()
+        {
+            TextClean();
+
+            if (objCanvas != null)
+            {
+                Object.Destroy(objCanvas);
+            }
+        }
+
         public void TextClean()
         {
             foreach (GameObject obj in listTextObjects) Object.Destroy(obj);

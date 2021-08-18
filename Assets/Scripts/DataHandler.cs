@@ -14,7 +14,7 @@ namespace ParadiseVille
 
         const int appartamentHabitans = 2;
         const int deputeDictictHabitans = 500;
-        const float employersPerUnit = 5.36f;
+        const float employersPerUnit = 5.41f;
 
         string hexColor = "";
         Mode mapMode;
@@ -33,9 +33,15 @@ namespace ParadiseVille
             mapMode = modeDefault;
         }
 
-        public void ShowData(Mode mode, string hexCode)
+        public void ResetData()
         {
-            if (hexColor != hexCode || mapMode != mode)
+            objTextDraw.TextClean();
+            objTextDraw.TextWrite("PARADISE", 30f, 50f, 60, Color.red);
+        }
+
+        public void ShowData(Mode mode, string hexCode, bool reset)
+        {
+            if (hexColor != hexCode || mapMode != mode || reset)
             {
                 hexColor = hexCode;
                 mapMode = mode;
@@ -47,124 +53,126 @@ namespace ParadiseVille
                         {
                             // *** FLEURVILLE *** //
                             // --- Montfleur --- //
-                            case "B5FF00": QuartierHandler(Ville.q_Jardinfleuri); break;
-                            case "00FF31": QuartierHandler(Ville.q_Ilechateau); break;
-                            case "0BC373": QuartierHandler(Ville.q_Roifrenaie); break;
-                            case "47FF00": QuartierHandler(Ville.q_Cotelevant); break;
+                            case "B6FF00": QuartierHandler(Ville.q_Jardinfleuri); break;
+                            case "00FF32": QuartierHandler(Ville.q_Ilechateau); break;
+                            case "0BC274": QuartierHandler(Ville.q_Roifrenaie); break;
+                            case "46FF00": QuartierHandler(Ville.q_Cotelevant); break;
                             // --- Coeurville --- //
                             case "FF0000": QuartierHandler(Ville.q_Hotel); break;
-                            case "FF7F91": QuartierHandler(Ville.q_Riveciel); break;
-                            case "EC2745": QuartierHandler(Ville.q_Eclaires); break;
+                            case "FF7F92": QuartierHandler(Ville.q_Riveciel); break;
+                            case "ED2644": QuartierHandler(Ville.q_Eclaires); break;
                             // --- Gloir --- //
-                            case "6028E7": QuartierHandler(Ville.q_Hallesluxe); break;
-                            case "9A82F4": QuartierHandler(Ville.q_Aquarelle); break;
-                            case "AA0CF4": QuartierHandler(Ville.q_Promenade); break;
+                            case "6127E8": QuartierHandler(Ville.q_Hallesluxe); break;
+                            case "9A81F4": QuartierHandler(Ville.q_Aquarelle); break;
+                            case "AB0CF4": QuartierHandler(Ville.q_Promenade); break;
                             // --- Imperial --- //
-                            case "70FA1E": QuartierHandler(Ville.q_Idylle); break;
-                            case "CBFE39": QuartierHandler(Ville.q_Anthese); break;
+                            case "6FF91F": QuartierHandler(Ville.q_Idylle); break;
+                            case "CAFD38": QuartierHandler(Ville.q_Anthese); break;
                             // --- Promission --- //
-                            case "EA9B39": QuartierHandler(Ville.q_Perpetuel); break;
-                            case "F7C326": QuartierHandler(Ville.q_Sabbat); break;
+                            case "E99B3A": QuartierHandler(Ville.q_Perpetuel); break;
+                            case "F8C227": QuartierHandler(Ville.q_Sabbat); break;
                             // --- Palefroi --- //
-                            case "89FFFF": QuartierHandler(Ville.q_Victoire); break;
-                            case "7E96FF": QuartierHandler(Ville.q_Lumiere); break;
-                            case "3CAEFF": QuartierHandler(Ville.q_Iris); break;
-                            case "1562C0": QuartierHandler(Ville.q_Sophora); break;
+                            case "8AFFFF": QuartierHandler(Ville.q_Victoire); break;
+                            case "7F96FF": QuartierHandler(Ville.q_Lumiere); break;
+                            case "3DAEFF": QuartierHandler(Ville.q_Iris); break;
+                            case "1462C1": QuartierHandler(Ville.q_Sophora); break;
 
                             // *** COTIERVILLE *** //
                             // --- Soleil --- //
-                            case "0BEBA2": QuartierHandler(Ville.q_Charme); break;
-                            case "9CEF13": QuartierHandler(Ville.q_Cotecorail); break;
+                            case "0BEAA3": QuartierHandler(Ville.q_Charme); break;
+                            case "9BEF13": QuartierHandler(Ville.q_Cotecorail); break;
                             case "00A600": QuartierHandler(Ville.q_Artisan); break;
                             // --- Couleur --- //
                             case "F40DB8": QuartierHandler(Ville.q_Chandelle); break;
-                            case "D60CC6": QuartierHandler(Ville.q_Parfumeur); break;
-                            case "F44173": QuartierHandler(Ville.q_Gremil); break;
-                            case "E4421E": QuartierHandler(Ville.q_Hulotte); break;
+                            case "D50CC6": QuartierHandler(Ville.q_Parfumeur); break;
+                            case "F44174": QuartierHandler(Ville.q_Gremil); break;
+                            case "E4421D": QuartierHandler(Ville.q_Hulotte); break;
                             // --- Castel --- //
-                            case "18A7CE": QuartierHandler(Ville.q_Prosperite); break;
-                            case "1837F7": QuartierHandler(Ville.q_Pastel); break;
-                            case "843EEF": QuartierHandler(Ville.q_Sansonnet); break;
+                            case "18A7CD": QuartierHandler(Ville.q_Prosperite); break;
+                            case "1837F8": QuartierHandler(Ville.q_Pastel); break;
+                            case "843EEE": QuartierHandler(Ville.q_Sansonnet); break;
                             // --- Chaleur --- //
-                            case "F22F63": QuartierHandler(Ville.q_Cotepalmier); break;
+                            case "F22E62": QuartierHandler(Ville.q_Cotepalmier); break;
                             case "F48F6E": QuartierHandler(Ville.q_Cotecafe); break;
-                            case "F7DF31": QuartierHandler(Ville.q_Brise); break;
+                            case "F8DF31": QuartierHandler(Ville.q_Brise); break;
                             // --- Tropique --- //
-                            case "7BF008": QuartierHandler(Ville.q_Tadorne); break;
-                            case "21FA0B": QuartierHandler(Ville.q_Cocotier); break;
-                            case "08B67B": QuartierHandler(Ville.q_Montfee); break;
+                            case "7CF008": QuartierHandler(Ville.q_Tadorne); break;
+                            case "21F90B": QuartierHandler(Ville.q_Cocotier); break;
+                            case "07B67C": QuartierHandler(Ville.q_Montfee); break;
 
                             // *** MONTVILLE *** //
                             // --- Roquerie --- //
-                            case "84C78F": QuartierHandler(Ville.q_Nichoir); break;
-                            case "1EF018": QuartierHandler(Ville.q_Trefleblue); break;
+                            case "52EC1C": QuartierHandler(Ville.q_Nichoir); break;
+                            case "04D123": QuartierHandler(Ville.q_Horizon); break;
+                            case "1CEC7C": QuartierHandler(Ville.q_Genievre); break;
                             // --- Ravinlis --- //
-                            case "6674BA": QuartierHandler(Ville.q_Paysage); break;
-                            case "1037EC": QuartierHandler(Ville.q_Croissance); break;
-                            case "398DFF": QuartierHandler(Ville.q_Tilleul); break;
+                            case "6574BA": QuartierHandler(Ville.q_Paysage); break;
+                            case "1137EB": QuartierHandler(Ville.q_Croissance); break;
+                            case "3A8CFF": QuartierHandler(Ville.q_Tilleul); break;
+                            case "5B9BFF": QuartierHandler(Ville.q_Trefleblue); break;
                             // --- Liberte --- //
                             case "DE664A": QuartierHandler(Ville.q_Enchanteur); break;
-                            case "E11468": QuartierHandler(Ville.q_Sublimite); break;
+                            case "E01469": QuartierHandler(Ville.q_Sublimite); break;
                             // --- Brume --- //
-                            case "6071C9": QuartierHandler(Ville.q_Tulipier); break;
-                            case "81F4FF": QuartierHandler(Ville.q_Montpistache); break;
-                            case "39B6EC": QuartierHandler(Ville.q_Accalmie); break;
+                            case "6171C9": QuartierHandler(Ville.q_Tulipier); break;
+                            case "82F4FF": QuartierHandler(Ville.q_Montpistache); break;
+                            case "3AB6EC": QuartierHandler(Ville.q_Accalmie); break;
 
                             // *** RIVIERVILLE *** //
                             // --- Promontoire --- //
-                            case "10C429": QuartierHandler(Ville.q_Mielfaine); break;
-                            case "08D2B2": QuartierHandler(Ville.q_Boishetre); break;
-                            case "9FFB0D": QuartierHandler(Ville.q_Blancheur); break;
+                            case "0FC42A": QuartierHandler(Ville.q_Mielfaine); break;
+                            case "08D1B2": QuartierHandler(Ville.q_Boishetre); break;
+                            case "9FFB0C": QuartierHandler(Ville.q_Blancheur); break;
                             // --- Oiselle --- //
-                            case "DB2815": QuartierHandler(Ville.q_Cheveche); break;
-                            case "F48910": QuartierHandler(Ville.q_Perroquet); break;
+                            case "DB2714": QuartierHandler(Ville.q_Cheveche); break;
+                            case "F48810": QuartierHandler(Ville.q_Perroquet); break;
                             // --- Grace --- //
-                            case "9F7AEF": QuartierHandler(Ville.q_Charite); break;
-                            case "4ADAF7": QuartierHandler(Ville.q_Aronde); break;
-                            case "3969F2": QuartierHandler(Ville.q_Palaisreine); break;
+                            case "9E7AEF": QuartierHandler(Ville.q_Charite); break;
+                            case "4AD9F8": QuartierHandler(Ville.q_Aronde); break;
+                            case "3A69F1": QuartierHandler(Ville.q_Palaisreine); break;
                             // --- Parcville --- //
-                            case "009600": QuartierHandler(Ville.q_Parcoiseau); break;
+                            case "019600": QuartierHandler(Ville.q_Parcoiseau); break;
 
                             // *** BOISVILLE *** //
                             // --- Conte --- //
-                            case "E72839": QuartierHandler(Ville.q_Nectar); break;
-                            case "E749BA": QuartierHandler(Ville.q_Lambruche); break;
+                            case "E8273A": QuartierHandler(Ville.q_Nectar); break;
+                            case "E849BA": QuartierHandler(Ville.q_Lambruche); break;
                             // --- Serein --- //
-                            case "4FE67B": QuartierHandler(Ville.q_Accord); break;
+                            case "50E57A": QuartierHandler(Ville.q_Accord); break;
                             // --- Versantvert --- //
-                            case "1854D6": QuartierHandler(Ville.q_Pivoine); break;
-                            case "7B4AC9": QuartierHandler(Ville.q_Peinardise); break;
+                            case "1753D6": QuartierHandler(Ville.q_Pivoine); break;
+                            case "7C4AC9": QuartierHandler(Ville.q_Peinardise); break;
                             // --- Clemence -- //
-                            case "3941FF": QuartierHandler(Ville.q_Purete); break;
-                            case "2EDEFA": QuartierHandler(Ville.q_Renardeau); break;
-                            case "4FA5FA": QuartierHandler(Ville.q_Ormaie); break;
+                            case "3A41FF": QuartierHandler(Ville.q_Purete); break;
+                            case "2FDDF9": QuartierHandler(Ville.q_Renardeau); break;
+                            case "4FA4F9": QuartierHandler(Ville.q_Ormaie); break;
                             // --- Prestige --- //
-                            case "E735FF": QuartierHandler(Ville.q_Comtefleur); break;
-                            case "F43E68": QuartierHandler(Ville.q_Licorne); break;
-                            case "EFB9C9": QuartierHandler(Ville.q_Gare); break;
+                            case "E835FF": QuartierHandler(Ville.q_Comtefleur); break;
+                            case "F43E69": QuartierHandler(Ville.q_Licorne); break;
+                            case "F0B9C8": QuartierHandler(Ville.q_Gare); break;
                             // --- Occidental --- //
-                            case "C0FB00": QuartierHandler(Ville.q_Bruyere); break;
+                            case "C0FA00": QuartierHandler(Ville.q_Bruyere); break;
 
                             // *** MERVILLE *** //
                             // --- Lotus --- //
-                            case "E7372E": QuartierHandler(Ville.q_Interfluve); break;
-                            case "FFF64A": QuartierHandler(Ville.q_Orchidee); break;
+                            case "E8372F": QuartierHandler(Ville.q_Interfluve); break;
+                            case "FFF549": QuartierHandler(Ville.q_Orchidee); break;
                             case "EC7C10": QuartierHandler(Ville.q_Cygneblanch); break;
                             // --- Zenith --- //
-                            case "5899EF": QuartierHandler(Ville.q_Aber); break;
-                            case "343BE7": QuartierHandler(Ville.q_Suavite); break;
-                            case "9C55E7": QuartierHandler(Ville.q_Suffle); break;
-                            case "1B74EF": QuartierHandler(Ville.q_Harmonie); break;
+                            case "5898EE": QuartierHandler(Ville.q_Aber); break;
+                            case "333AE8": QuartierHandler(Ville.q_Suavite); break;
+                            case "9B55E8": QuartierHandler(Ville.q_Suffle); break;
+                            case "1C74F0": QuartierHandler(Ville.q_Harmonie); break;
                             // --- Vanille --- //
-                            case "5AF02E": QuartierHandler(Ville.q_Cedres); break;
-                            case "03B62E": QuartierHandler(Ville.q_Gattilier); break;
+                            case "59F02F": QuartierHandler(Ville.q_Cedres); break;
+                            case "03B62F": QuartierHandler(Ville.q_Gattilier); break;
                             // --- Maritime --- //
-                            case "E12FC3": QuartierHandler(Ville.q_Littoral); break;
-                            case "EA9F2C": QuartierHandler(Ville.q_Coquille); break;
-                            case "D96C8C": QuartierHandler(Ville.q_Goeland); break;
+                            case "E12FC2": QuartierHandler(Ville.q_Littoral); break;
+                            case "E99F2B": QuartierHandler(Ville.q_Coquille); break;
+                            case "D96B8B": QuartierHandler(Ville.q_Goeland); break;
                             // --- Phare --- //
-                            case "4ACFD9": QuartierHandler(Ville.q_Tissage); break;
-                            case "94E815": QuartierHandler(Ville.q_Port); break;
+                            case "49CFD8": QuartierHandler(Ville.q_Tissage); break;
+                            case "93E814": QuartierHandler(Ville.q_Port); break;
                         }
                         break;
                     }
@@ -172,46 +180,46 @@ namespace ParadiseVille
                         switch (hexCode)
                         {
                             // FLEURVILLE //
-                            case "0BC373": CantonHandler(Ville.c_MontFleur); break;
-                            case "EC2745": CantonHandler(Ville.c_Coeurville); break;
-                            case "9A82F4": CantonHandler(Ville.c_Gloir); break;
-                            case "CBFE39": CantonHandler(Ville.c_Imperial); break;
-                            case "EA9B39": CantonHandler(Ville.c_Promission); break;
-                            case "89FFFF": CantonHandler(Ville.c_Palefroi); break;
+                            case "0BC274": CantonHandler(Ville.c_MontFleur); break;
+                            case "ED2644": CantonHandler(Ville.c_Coeurville); break;
+                            case "9A81F4": CantonHandler(Ville.c_Gloir); break;
+                            case "CAFD38": CantonHandler(Ville.c_Imperial); break;
+                            case "E99B3A": CantonHandler(Ville.c_Promission); break;
+                            case "8AFFFF": CantonHandler(Ville.c_Palefroi); break;
 
                             // COTIERVILLE //
-                            case "0BEBA2": CantonHandler(Ville.c_Soleil); break;
-                            case "F44173": CantonHandler(Ville.c_Couleur); break;
-                            case "1837F7": CantonHandler(Ville.c_Castel); break;
+                            case "0BEAA3": CantonHandler(Ville.c_Soleil); break;
+                            case "F44174": CantonHandler(Ville.c_Couleur); break;
+                            case "1837F8": CantonHandler(Ville.c_Castel); break;
                             case "F48F6E": CantonHandler(Ville.c_Chaleur); break;
-                            case "08B67B": CantonHandler(Ville.c_Tropique); break;
+                            case "07B67C": CantonHandler(Ville.c_Tropique); break;
 
                             // MONTVILLE //
-                            case "1EF018": CantonHandler(Ville.c_Roquerie); break;
-                            case "398DFF": CantonHandler(Ville.c_Ravinlis); break;
-                            case "E11468": CantonHandler(Ville.c_Liberte); break;
-                            case "81F4FF": CantonHandler(Ville.c_Brume); break;
+                            case "1FF018": CantonHandler(Ville.c_Roquerie); break;
+                            case "3A8CFF": CantonHandler(Ville.c_Ravinlis); break;
+                            case "E01469": CantonHandler(Ville.c_Liberte); break;
+                            case "82F4FF": CantonHandler(Ville.c_Brume); break;
 
                             // RIVIERVILLE //
-                            case "9FFB0D": CantonHandler(Ville.c_Promontoire); break;
-                            case "DB2815": CantonHandler(Ville.c_Oiselle); break;
-                            case "9F7AEF": CantonHandler(Ville.c_Grace); break;
-                            case "009600": CantonHandler(Ville.c_Parcville); break;
+                            case "9FFB0C": CantonHandler(Ville.c_Promontoire); break;
+                            case "DB2714": CantonHandler(Ville.c_Oiselle); break;
+                            case "9E7AEF": CantonHandler(Ville.c_Grace); break;
+                            case "019600": CantonHandler(Ville.c_Parcville); break;
 
                             // BOISVILLE //
-                            case "E72839": CantonHandler(Ville.c_Conte); break;
-                            case "4FE67B": CantonHandler(Ville.c_Serein); break;
-                            case "7B4AC9": CantonHandler(Ville.c_Versantvert); break;
-                            case "3941FF": CantonHandler(Ville.c_Clemence); break;
-                            case "E735FF": CantonHandler(Ville.c_Prestige); break;
-                            case "C0FB00": CantonHandler(Ville.c_Occidental); break;
+                            case "E8273A": CantonHandler(Ville.c_Conte); break;
+                            case "50E57A": CantonHandler(Ville.c_Serein); break;
+                            case "7C4AC9": CantonHandler(Ville.c_Versantvert); break;
+                            case "3A41FF": CantonHandler(Ville.c_Clemence); break;
+                            case "E835FF": CantonHandler(Ville.c_Prestige); break;
+                            case "C0FA00": CantonHandler(Ville.c_Occidental); break;
 
                             // MERVILLE //
-                            case "FFF64A": CantonHandler(Ville.c_Lotus); break;
-                            case "5899EF": CantonHandler(Ville.c_Zenith); break;
-                            case "03B62E": CantonHandler(Ville.c_Vanille); break;
-                            case "D96C8C": CantonHandler(Ville.c_Maritime); break;
-                            case "4ACFD9": CantonHandler(Ville.c_Phare); break;
+                            case "FFF549": CantonHandler(Ville.c_Lotus); break;
+                            case "5898EE": CantonHandler(Ville.c_Zenith); break;
+                            case "03B62F": CantonHandler(Ville.c_Vanille); break;
+                            case "D96B8B": CantonHandler(Ville.c_Maritime); break;
+                            case "49CFD8": CantonHandler(Ville.c_Phare); break;
                         }
                         break;
                     }
@@ -219,9 +227,9 @@ namespace ParadiseVille
                         switch (hexCode)
                         {
                             case "FCFF84": VilletteHandler(Ville.v_Fleurville); break;
-                            case "FF6C91": VilletteHandler(Ville.v_Cotierville); break;
-                            case "84FF91": VilletteHandler(Ville.v_Montville); break;
-                            case "94FF5A": VilletteHandler(Ville.v_Rivierville); break;
+                            case "FF6B90": VilletteHandler(Ville.v_Cotierville); break;
+                            case "7AFFB6": VilletteHandler(Ville.v_Montville); break;
+                            case "94FF5B": VilletteHandler(Ville.v_Rivierville); break;
                             case "E77CFF": VilletteHandler(Ville.v_Boisville); break;
                             case "FFC16B": VilletteHandler(Ville.v_Merville); break;
                         }
@@ -418,6 +426,8 @@ namespace ParadiseVille
                 }
             }
 
+            squareCanton = Mathf.Round(squareCanton * 10f) / 10f;
+
             objTextDraw.TextWrite(cantonName, 30f, 50f, 60, Color.red);
             objTextDraw.TextWrite("Villette", villetteName, 30f, 140f, 40, Color.red);
 
@@ -553,6 +563,8 @@ namespace ParadiseVille
                 }
             }
 
+            squareVillette = Mathf.Round(squareVillette * 10f) / 10f;
+
             objTextDraw.TextWrite(villetteName, 30f, 50f, 60, Color.red);
 
             objTextDraw.TextWrite("COMMUNAUTÉ", 30f, 280f, 40, Color.red);
@@ -674,6 +686,8 @@ namespace ParadiseVille
                     localDepute += Mathf.RoundToInt((quartierHabitans + quartierEmployers) / (float)deputeDictictHabitans);
                 }
             }
+
+            squareVille = Mathf.Round(squareVille * 10f) / 10f;
 
             objTextDraw.TextWrite("PARADISE", 30f, 50f, 60, Color.red);
 
