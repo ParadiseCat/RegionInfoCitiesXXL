@@ -59,8 +59,8 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Manager\Quartier.cs" />
-    <Compile Include="Assets\Scripts\Manager\Station.cs" />
+    <Compile Include="Assets\Scripts\State\Quartier.cs" />
+    <Compile Include="Assets\Scripts\State\Station.cs" />
     <Compile Include="Assets\Scripts\Manager\EmployerType.cs" />
     <Compile Include="Assets\Scripts\Handler\QuartierData.cs" />
     <Compile Include="Assets\Scripts\Handler\DataHandler.cs" />
@@ -70,14 +70,14 @@
     <Compile Include="Assets\Scripts\Interface\TextDraw.cs" />
     <Compile Include="Assets\Scripts\Handler\DataOutput.cs" />
     <Compile Include="Assets\Scripts\Data\DistrictData.cs" />
-    <Compile Include="Assets\Scripts\Manager\Routier.cs" />
+    <Compile Include="Assets\Scripts\State\Routier.cs" />
     <Compile Include="Assets\Scripts\Handler\TramMenu.cs" />
     <Compile Include="Assets\Scripts\Interface\GameMap.cs" />
-    <Compile Include="Assets\Scripts\Manager\Villette.cs" />
+    <Compile Include="Assets\Scripts\State\Villette.cs" />
     <Compile Include="Assets\Scripts\Manager\Mode.cs" />
     <Compile Include="Assets\Scripts\Manager\SocialState.cs" />
     <Compile Include="Assets\Scripts\Data\HomeData.cs" />
-    <Compile Include="Assets\Scripts\Manager\Canton.cs" />
+    <Compile Include="Assets\Scripts\State\Canton.cs" />
     <Compile Include="Assets\Scripts\Manager\GameCamera.cs" />
   </ItemGroup>
   <ItemGroup>

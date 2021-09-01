@@ -351,16 +351,16 @@
 "Assets/Scripts/Handler/TramMenu.cs"
 "Assets/Scripts/Interface/GameMap.cs"
 "Assets/Scripts/Interface/TextDraw.cs"
-"Assets/Scripts/Manager/Canton.cs"
 "Assets/Scripts/Manager/EmployerType.cs"
 "Assets/Scripts/Manager/GameCamera.cs"
 "Assets/Scripts/Manager/GameController.cs"
 "Assets/Scripts/Manager/Mode.cs"
-"Assets/Scripts/Manager/Quartier.cs"
-"Assets/Scripts/Manager/Routier.cs"
 "Assets/Scripts/Manager/SocialState.cs"
-"Assets/Scripts/Manager/Station.cs"
-"Assets/Scripts/Manager/Villette.cs"
+"Assets/Scripts/State/Canton.cs"
+"Assets/Scripts/State/Quartier.cs"
+"Assets/Scripts/State/Routier.cs"
+"Assets/Scripts/State/Station.cs"
+"Assets/Scripts/State/Villette.cs"
 -langversion:8.0
 
 /deterministic

@@ -251,7 +251,6 @@ namespace ParadiseVille.Handler
             foreach (Quartier quartier in quartierList)
             {
                 DistrictData data = DataVille.Information(quartier);
-                //UnityEngine.Debug.Log("quartier = " + quartier.ToString());
                 AddData(quartier, data.homeDataList, data.employersDataDictionary);
                 squares[added] = data.square;
                 added++;

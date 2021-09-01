@@ -58,8 +58,10 @@ namespace ParadiseVille.Handler
                             // --- Palefroi --- //
                             case "8AFFFF": QuartierHandler(Quartier.q_Victoire); break;
                             case "7F96FF": QuartierHandler(Quartier.q_Lumiere); break;
-                            case "3DAEFF": QuartierHandler(Quartier.q_Iris); break;
                             case "1462C1": QuartierHandler(Quartier.q_Sophora); break;
+                            // --- Lucide --- //
+                            case "EF881F": QuartierHandler(Quartier.q_Iris); break;
+                            case "E75388": QuartierHandler(Quartier.q_Parcamour); break;
 
                             // *** COTIERVILLE *** //
                             // --- Soleil --- //
@@ -99,7 +101,7 @@ namespace ParadiseVille.Handler
                             case "E01469": QuartierHandler(Quartier.q_Sublimite); break;
                             // --- Brume --- //
                             case "6171C9": QuartierHandler(Quartier.q_Tulipier); break;
-                            case "82F4FF": QuartierHandler(Quartier.q_Montpistache); break;
+                            case "82F4FF": QuartierHandler(Quartier.q_Montazur); break;
                             case "3AB6EC": QuartierHandler(Quartier.q_Accalmie); break;
 
                             // *** RIVIERVILLE *** //
@@ -170,7 +172,8 @@ namespace ParadiseVille.Handler
                             case "CAFD38": CantonHandler(Canton.c_Imperial); break;
                             case "E99B3A": CantonHandler(Canton.c_Perfection); break;
                             case "8AFFFF": CantonHandler(Canton.c_Palefroi); break;
-
+                            case "E550CF": CantonHandler(Canton.c_Lucide); break;
+                                    
                             // COTIERVILLE //
                             case "0BEAA3": CantonHandler(Canton.c_Soleil); break;
                             case "F44174": CantonHandler(Canton.c_Couleur); break;
@@ -204,6 +207,7 @@ namespace ParadiseVille.Handler
                             case "03B62F": CantonHandler(Canton.c_Vanille); break;
                             case "D96B8B": CantonHandler(Canton.c_Maritime); break;
                             case "49CFD8": CantonHandler(Canton.c_Phare); break;
+                            case "EC7C10": CantonHandler(Canton.c_Floraison); break;
                         }
                         break;
                     }
