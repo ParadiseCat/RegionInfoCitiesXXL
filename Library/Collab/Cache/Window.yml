@@ -13,29 +13,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SimpleSelectedItems:
-    m_Keys:
-    - Assets/Scripts/Data.meta
-    - Assets/Scripts/Data/CityData.cs
-    - Assets/Scripts/Data/CityData.cs.meta
-    - Assets/Scripts/Data/DataStructs.cs
-    - Assets/Scripts/Data/DataStructs.cs.meta
-    - Assets/Scripts/Handler.meta
-    - Assets/Scripts/Handler/DataHandler.cs
-    - Assets/Scripts/Handler/DataHandler.cs.meta
-    - Assets/Scripts/Interface.meta
-    - Assets/Scripts/Interface/GameMap.cs
-    - Assets/Scripts/Interface/GameMap.cs.meta
-    - Assets/Scripts/Interface/TextDraw.cs
-    - Assets/Scripts/Interface/TextDraw.cs.meta
-    - Assets/Scripts/Manager.meta
-    - Assets/Scripts/Manager/GameController.cs
-    - Assets/Scripts/Manager/GameController.cs.meta
-    - Assets/Scripts/Manager/Interfaces.cs
-    - Assets/Scripts/Manager/Interfaces.cs.meta
-    - Assets/Scripts/Manager/StaticData.cs
-    - Assets/Scripts/Manager/StaticData.cs.meta
-    - 
-    m_Values: 010101010101010101010101010101010101010101
+    m_Keys: []
+    m_Values: 
   RevisionSummary: 
   ChangesSearchValue: 
   SelectedHistoryRevision: 

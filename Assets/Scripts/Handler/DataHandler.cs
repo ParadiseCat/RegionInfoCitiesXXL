@@ -59,6 +59,7 @@ namespace ParadiseVille.Handler
                             case "8AFFFF": QuartierHandler(Quartier.q_Victoire); break;
                             case "7F96FF": QuartierHandler(Quartier.q_Lumiere); break;
                             case "1462C1": QuartierHandler(Quartier.q_Sophora); break;
+                            case "313AE0": QuartierHandler(Quartier.q_Ciel); break;
                             // --- Lucide --- //
                             case "EF881F": QuartierHandler(Quartier.q_Iris); break;
                             case "E75388": QuartierHandler(Quartier.q_Parcamour); break;
@@ -140,12 +141,17 @@ namespace ParadiseVille.Handler
                             case "C0FA00": QuartierHandler(Quartier.q_Bruyere); break;
 
                             // *** MERVILLE *** //
-                            // --- Lotus --- //
-                            case "E8372F": QuartierHandler(Quartier.q_Interfluve); break;
-                            case "FFF549": QuartierHandler(Quartier.q_Orchidee); break;
-                            case "EC7C10": QuartierHandler(Quartier.q_Cygneblanch); break;
-                            // --- Zenith --- //
-                            case "5898EE": QuartierHandler(Quartier.q_Aber); break;
+                            // --- Sinousité --- //
+                            case "E8372F": QuartierHandler(Quartier.q_Lotus); break;
+                            case "FF4992": QuartierHandler(Quartier.q_Artois); break;
+                            // --- Floraison --- //
+                            case "12EA07": QuartierHandler(Quartier.q_Orchidee); break;
+                            case "9BEF2D": QuartierHandler(Quartier.q_Ramage); break;
+                            // --- Juvénilité --- //
+                            case "EC7C10": QuartierHandler(Quartier.q_Embrume); break;
+                            case "E2C028": QuartierHandler(Quartier.q_Poesie); break;
+                            // --- Volage --- //
+                            case "5898EE": QuartierHandler(Quartier.q_Abreuvoir); break;
                             case "333AE8": QuartierHandler(Quartier.q_Suavite); break;
                             case "9B55E8": QuartierHandler(Quartier.q_Suffle); break;
                             case "1C74F0": QuartierHandler(Quartier.q_Harmonie); break;
@@ -154,9 +160,9 @@ namespace ParadiseVille.Handler
                             case "03B62F": QuartierHandler(Quartier.q_Gattilier); break;
                             // --- Maritime --- //
                             case "E12FC2": QuartierHandler(Quartier.q_Littoral); break;
-                            case "E99F2B": QuartierHandler(Quartier.q_Coquille); break;
+                            case "E99F2B": QuartierHandler(Quartier.q_Voilure); break;
                             case "D96B8B": QuartierHandler(Quartier.q_Goeland); break;
-                            // --- Phare --- //
+                            // --- Flux --- //
                             case "49CFD8": QuartierHandler(Quartier.q_Tissage); break;
                             case "93E814": QuartierHandler(Quartier.q_Port); break;
                         }
@@ -202,12 +208,13 @@ namespace ParadiseVille.Handler
                             case "C0FA00": CantonHandler(Canton.c_Occidental); break;
 
                             // MERVILLE //
-                            case "FFF549": CantonHandler(Canton.c_Lotus); break;
-                            case "5898EE": CantonHandler(Canton.c_Zenith); break;
+                            case "FF4992": CantonHandler(Canton.c_Sinousite); break;
+                            case "5898EE": CantonHandler(Canton.c_Volage); break;
                             case "03B62F": CantonHandler(Canton.c_Vanille); break;
                             case "D96B8B": CantonHandler(Canton.c_Maritime); break;
-                            case "49CFD8": CantonHandler(Canton.c_Phare); break;
-                            case "EC7C10": CantonHandler(Canton.c_Floraison); break;
+                            case "49CFD8": CantonHandler(Canton.c_Flux); break;
+                            case "12EA07": CantonHandler(Canton.c_Floraison); break;
+                            case "E2C028": CantonHandler(Canton.c_Juvenilite); break;
                         }
                         break;
                     }

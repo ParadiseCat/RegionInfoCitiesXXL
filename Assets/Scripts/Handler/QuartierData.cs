@@ -8,7 +8,7 @@ namespace ParadiseVille.Handler
         const int MAX_ETAGES = 7;
         const int APPARTAMENT_HABITANS = 2;
         const int EMPLOYER_GROUPS = 10;
-        const float EMPLOYERS_PER_UNIT = 5.41f;
+        const float EMPLOYERS_PER_UNIT = 5.72f;
         const float DEPUTE_DISTRICT_HABITANS = 500f;
         const string VILL_NAME = "PARADISE";
 

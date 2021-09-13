@@ -31,11 +31,12 @@
         c_Clemence = 640,
         c_Prestige = 650,
         c_Occidental = 660,
-        c_Lotus = 710,
-        c_Zenith = 720,
+        c_Sinousite = 710,
+        c_Volage = 720,
         c_Vanille = 730,
         c_Maritime = 740,
-        c_Phare = 750,
-        c_Floraison = 760
+        c_Flux = 750,
+        c_Floraison = 760,
+        c_Juvenilite = 770
     }
 }
