@@ -13,17 +13,19 @@ namespace ParadiseVille
         public string canton { private set; get; }
         public string villette { private set; get; }
         public float square { private set; get; }
+        public int founded { private set; get; }
 
         public List<HomeData> homeDataList { private set; get; }
         public Dictionary<EmployerType, int> employersDataDictionary { private set; get; }
         public List<string> placeDataList { private set; get; }
 
-        public DistrictData(string quartier, string canton, string villette, float square)
+        public DistrictData(string quartier, string canton, string villette, float square, int founded)
         {
             this.quartier = quartier;
             this.canton = canton;
             this.villette = villette;
             this.square = square;
+            this.founded = founded;
 
             homeDataList = new List<HomeData>();
 

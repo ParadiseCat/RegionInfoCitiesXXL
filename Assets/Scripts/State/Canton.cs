@@ -12,6 +12,7 @@
         c_Perfection = 150,
         c_Palefroi = 160,
         c_Lucide = 170,
+        c_Prince = 180,
         c_Soleil = 210,
         c_Couleur = 220,
         c_Castel = 230,

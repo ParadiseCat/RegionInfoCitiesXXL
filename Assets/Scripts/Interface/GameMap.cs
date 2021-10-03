@@ -17,6 +17,8 @@ namespace ParadiseVille
         int objTextureWidth;
         int objTextureHeight;
 
+        GameObject tGen;
+
         public void ObjectReset()
         {
             if (objMap != null)
@@ -152,12 +154,24 @@ namespace ParadiseVille
                 return 0;
         }
 
+        public void ThematicBasicRefresh()
+        {
+            if (tGen == null)
+            {
+                tGen = new GameObject("Gen");
+                ThematicGenerator tem = tGen.AddComponent<ThematicGenerator>();
+                tem.Create(ref objTexture, objTextureWidth, objTextureHeight);
+            }
+        }
+
         public int GetTextureWidth()
         {
             if (objTexture != null)
+            {
                 return objTextureWidth;
-            else
-                return 1;
+            }
+            
+            return 1;
         }
     }
 }

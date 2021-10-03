@@ -62,6 +62,12 @@ namespace ParadiseVille.Handler
             }
         }
 
+        public void FoundedData(float startX, float startY)
+        {
+            int year = qData.founded;
+            writer.TextWrite("Année de fondation", year.ToString(), startX, startY, 25, textColor);
+        }
+
         public void MainData(float startX, float startY)
         {
             float square = Mathf.Round(qData.Square * 10f) / 10f;
@@ -87,8 +93,6 @@ namespace ParadiseVille.Handler
             int length = keys.Length;
             int writed = 0;
 
-            writer.TextWrite("EMPLOI", startX, startY, 40, headColor);
-
             for (int i = 0; i < length; i++)
             {
                 if (workers[i] > 0)
@@ -96,6 +100,11 @@ namespace ParadiseVille.Handler
                     writer.TextWrite(keys[i], workers[i].ToString(), startX, startY + 60f + 30f * writed, 25, textColor);
                     writed++;
                 }
+            }
+
+            if (writed > 0)
+            {
+                writer.TextWrite("EMPLOI", startX, startY, 40, headColor);
             }
         }
 

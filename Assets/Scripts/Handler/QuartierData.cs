@@ -8,7 +8,7 @@ namespace ParadiseVille.Handler
         const int MAX_ETAGES = 7;
         const int APPARTAMENT_HABITANS = 2;
         const int EMPLOYER_GROUPS = 10;
-        const float EMPLOYERS_PER_UNIT = 5.72f;
+        const float EMPLOYERS_PER_UNIT = 5.95f;
         const float DEPUTE_DISTRICT_HABITANS = 500f;
         const string VILL_NAME = "PARADISE";
 
@@ -40,6 +40,8 @@ namespace ParadiseVille.Handler
         int[] socialGroupParts;
         int[] etages;
         int[] etagesParts;
+
+        public int founded = 0;
 
         public int CountResidents
         {
@@ -248,12 +250,24 @@ namespace ParadiseVille.Handler
             appartamentsData = new int[length, MAX_ETAGES];
             employersData = new int[length, EMPLOYER_GROUPS];
 
-            foreach (Quartier quartier in quartierList)
+            if (level == 1)
             {
-                DistrictData data = DataVille.Information(quartier);
+                Quartier quartier = quartierList[0];
+                DistrictData data = DataVille.Information(quartierList[0]);
                 AddData(quartier, data.homeDataList, data.employersDataDictionary);
-                squares[added] = data.square;
-                added++;
+                squares[0] = data.square;
+                founded = data.founded;
+                added = 1;
+            }
+            else
+            {
+                foreach (Quartier quartier in quartierList)
+                {
+                    DistrictData data = DataVille.Information(quartier);
+                    AddData(quartier, data.homeDataList, data.employersDataDictionary);
+                    squares[added] = data.square;
+                    added++;
+                }
             }
         }
 

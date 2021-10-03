@@ -10,6 +10,7 @@
         Villette,
         Ville,
         Tram,
+        Thema,
         None
     };
 }

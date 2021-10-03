@@ -15,8 +15,10 @@ namespace ParadiseVille
         DataHandler objDataHandler;
 
         GameObject tramMenu;
+        GameObject thematicMenu;
 
         bool tramShow = false;
+        bool themaShow = false;
 
         string hexColor;
 
@@ -30,6 +32,7 @@ namespace ParadiseVille
         Color defaultButtonColor;
         Color selectButtonColor;
         Color tramButtonColor;
+        Color themaButtonColor;
 
         private void Awake()
         {
@@ -51,18 +54,20 @@ namespace ParadiseVille
             Vector2 button = new Vector2(120f, 60f);
             float distance = 10f;
 
-            buttonRects = new Rect[5]
+            buttonRects = new Rect[6]
             {
                 GetScaleRect(start.x, start.y, button.x, button.y, distance, 0, 0),
-                GetScaleRect(start.x, start.y, button.x, button.y, distance, 0, 1),
                 GetScaleRect(start.x, start.y, button.x, button.y, distance, 1, 0),
+                GetScaleRect(start.x, start.y, button.x, button.y, distance, 0, 1),
                 GetScaleRect(start.x, start.y, button.x, button.y, distance, 1, 1),
-                GetScaleRect(start.x, start.y, button.x, button.y, distance, 0, 2)
+                GetScaleRect(start.x, start.y, button.x, button.y, distance, 0, 2),
+                GetScaleRect(start.x, start.y, button.x, button.y, distance, 1, 2)
             };
 
             defaultButtonColor = new Color(0.1f, 0.7f, 0.9f);
             selectButtonColor = new Color(1.0f, 0.3f, 0.2f);
             tramButtonColor = new Color(1.0f, 1.0f, 0f);
+            themaButtonColor = new Color(0.8f, 0.2f, 1.0f);
 
             SetModeMap(Mode.Ville, false);
         }
@@ -78,6 +83,7 @@ namespace ParadiseVille
             GUIButtonDraw(buttonRects[2], "Canton", buttonStyle, Mode.Canton);
             GUIButtonDraw(buttonRects[3], "Quartier", buttonStyle, Mode.Quartier);
             GUIButtonDraw(buttonRects[4], "Tram", buttonStyle, Mode.Tram);
+            GUIButtonDraw(buttonRects[5], "Thèmes", buttonStyle, Mode.Thema);
         }
 
         void Update()
@@ -103,7 +109,7 @@ namespace ParadiseVille
             }
             else if (Input.GetKeyDown(KeyCode.RightShift))
             {
-                // for test
+                objTextureMap.ThematicBasicRefresh();
             }
             else if (Input.GetKeyDown(KeyCode.Escape))
             {
@@ -127,7 +133,7 @@ namespace ParadiseVille
                 switch (mode)
                 {
                     case Mode.Ville: {
-                        if (!tramShow)
+                        if (!tramShow && !themaShow)
                         {
                             objDataHandler.ShowData(mode, "FFFFFF", reset);
                         }
@@ -136,7 +142,7 @@ namespace ParadiseVille
                         break;
                     }
                     case Mode.Villette: {
-                        if (!tramShow)
+                        if (!tramShow && !themaShow)
                         {
                             objDataHandler.ShowData(mode, "FCFF84", reset);
                         }
@@ -146,7 +152,7 @@ namespace ParadiseVille
                         break;
                     }
                     case Mode.Canton: {
-                        if (!tramShow)
+                        if (!tramShow && !themaShow)
                         {
                             objDataHandler.ShowData(mode, "0BC274", reset);
                         }
@@ -156,7 +162,7 @@ namespace ParadiseVille
                         break;
                     }
                     case Mode.Quartier: {
-                        if (!tramShow)
+                        if (!tramShow && !themaShow)
                         {
                             objDataHandler.ShowData(mode, "B6FF00", reset);
                         }
@@ -169,6 +175,7 @@ namespace ParadiseVille
                         if (!tramShow)
                         {
                             tramShow = true;
+                            themaShow = false;
                             ShowTramMenu();
                             objDataHandler.ResetData();
                         }
@@ -182,6 +189,26 @@ namespace ParadiseVille
                         }
                         break;
                     }
+                    case Mode.Thema:
+                        {
+                            if (!themaShow)
+                            {
+                                themaShow = true;
+                                tramShow = false;
+                                ShowThematicMenu();
+                                objDataHandler.ResetData();
+                            }
+                            else
+                            {
+                                themaShow = false;
+                                HideThematicMenu();
+                                Mode current = textureMode;
+                                textureMode = Mode.None;
+                                SetModeMap(current, true);
+                            }
+
+                            break;
+                        }
                 }
             }
 
@@ -207,6 +234,10 @@ namespace ParadiseVille
             {
                 GUI.color = tramButtonColor;
             }
+            else if (modeVilleAction == Mode.Thema && themaShow)
+            {
+                GUI.color = themaButtonColor;
+            }
 
             if (GUI.Button(position, text, style))
             {
@@ -226,13 +257,24 @@ namespace ParadiseVille
         void ShowTramMenu()
         {
             tramMenu = new GameObject("objTramMenu");
-            TramMenu tramComponent = tramMenu.AddComponent<TramMenu>();
+            TramController tramComponent = tramMenu.AddComponent<TramController>();
             tramComponent.drawLineXstart = GameCamera.cameraHalf_Width - 512f;
         }
 
         void HideTramMenu()
         {
             Destroy(tramMenu);
+        }
+
+        void ShowThematicMenu()
+        {
+            thematicMenu = new GameObject("objThematicMenu");
+            ThematicController thematicController = thematicMenu.AddComponent<ThematicController>();
+        }
+
+        void HideThematicMenu()
+        {
+            Destroy(thematicMenu);
         }
     }
 }
