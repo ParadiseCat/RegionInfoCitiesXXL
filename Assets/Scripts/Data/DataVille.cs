@@ -125,7 +125,8 @@
                     dat.HomeDataAdd("Faç", SocialState.Professional, 2, 22, new int[6] { 4, 5, 5, 5, 5, 2 });
                     dat.EmployersDataAdd(EmployerType.Administration, 1 * 9 + 1 * 4);
                     dat.EmployersDataAdd(EmployerType.Culture, 1 * 3 + 1 * 12);
-                    dat.EmployersDataAdd(EmployerType.Hotel, 1 * 6 + 6 * 4);
+                    dat.EmployersDataAdd(EmployerType.Hotel, 1 * 6 + 5 * 4);
+                    dat.EmployersDataAdd(EmployerType.Education, 1 * 6);
                     dat.PlaceDataAdd("Grand Hôtel de Ville", "Public conseil de Ville", "Club de Philosophie", "Quai de Roses",
                                      "Departament de Nature", "Boulevard de Théâtre");
                     dat.PlaceDataAdd("place de la Philosophie");
@@ -208,8 +209,8 @@
                     dat.EmployersDataAdd(EmployerType.Hotel, 1 * 28 + 3 * 10 + 1 * 6 + 1 * 4);
                     dat.EmployersDataAdd(EmployerType.Office, 11 * 6 + 4 * 4);
                     dat.EmployersDataAdd(EmployerType.Trade, 1 * 10);
-                    dat.PlaceDataAdd("Premium Lux Hôtel", "Hôtel de Monde Perpétuel", "Centre d'affaires de Paradise",
-                                     "Hôtel Royal", "Dép-t d'éducation",  
+                    dat.PlaceDataAdd("Premium Lux Hôtel", "Hôtel de Monde Perpétuel", 
+                                     "Centre d'affaires de Paradise", "Hôtel Royal", "Dép-t d'éducation",  
                                      "Dép-t de l'énergie", "Dép-t du commerce");
                     dat.PlaceDataAdd("place d'Élite", "place de Vitalité");
                     return dat;
@@ -247,8 +248,9 @@
                     dat.EmployersDataAdd(EmployerType.Trade, 1 * 7 + 1 * 2);
                     dat.PlaceDataAdd("Centre culturel du Royaume", "Royaumetour", "Dép-t d'économie", 
                                      "Dép-t des transports", "Dép-t de l'eau et des ressources", "Dép-t des arts",
-                                     "Dép-t de haute technologie", "Dép-t de l'environnement", "Dép-t de la société");
-                    dat.PlaceDataAdd("place de l'Unité", "place de le Mondle", "place de l'Eau");
+                                     "Dép-t de haute technologie", "Dép-t de l'environnement", 
+                                     "Dép-t de la société");
+                    dat.PlaceDataAdd("place de l'Unité", "place de le Monde", "place de l'Eau");
                     return dat;
                 }
                 case Quartier.q_Iris: {
@@ -490,20 +492,33 @@
                     dat.PlaceDataAdd("bois de Hêtres des Contreforts");
                     return dat;
                 }
-                case Quartier.q_Cheveche: {
-                    dat = new DistrictData("CHEVÊCHE", "Oiselle", "Rivièrville", 28.6f, 125);
-                    dat.HomeDataAdd("---", SocialState.Specialist, 2, 100, new int[1] { 10 });
+                case Quartier.q_Chatterie: {
+                    dat = new DistrictData("CHATTERIE", "Oiselle", "Rivièrville", 28.6f, 125);
+                    dat.HomeDataAdd("Blu", SocialState.Specialist, 2, 20, new int[5] { 0, 6, 6, 6, 8 });
+                    dat.HomeDataAdd("Bla", SocialState.Specialist, 2, 34, new int[4] { 4, 4, 4, 4 });
+                    dat.EmployersDataAdd(EmployerType.Culture, 1 * 16);
+                    dat.EmployersDataAdd(EmployerType.Office, 8 * 7);
+                    dat.EmployersDataAdd(EmployerType.Services, 1 * 1);
+                    dat.PlaceDataAdd("Galerie de classiques", "CB Pavillon de Queue");
+                    dat.PlaceDataAdd("place de Cheval", "place de la Chatterie", "place les Profitrole");
                     dat.PlaceDataAdd("parc de la Renaissance");
                     return dat;
-                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
-                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
                 }
                 case Quartier.q_Perroquet: {
                     dat = new DistrictData("PERROQUET", "Oiselle", "Rivièrville", 31.0f, 171);
-                    dat.HomeDataAdd("---", SocialState.Responsible, 2, 75, new int[1] { 10 });
+                    dat.HomeDataAdd("Gri", SocialState.Responsible, 2, 23, new int[6] { 0, 2, 2, 2, 2, 2 });
+                    dat.HomeDataAdd("Blu", SocialState.Professional, 2, 21, new int[7] { 3, 3, 3, 3, 3, 2, 3});
+                    dat.HomeDataAdd("Bla", SocialState.Responsible, 5, 10, new int[6] {2, 7, 7, 7, 7, 2});
+                    dat.EmployersDataAdd(EmployerType.Administration, 1 * 9);
+                    dat.EmployersDataAdd(EmployerType.Sport, 1 * 10 + 1 * 8 + 1 * 1);
+                    dat.EmployersDataAdd(EmployerType.Services, 1 * 4);
+                    dat.EmployersDataAdd(EmployerType.Culture, 1 * 16 + 1 * 3);
+                    dat.EmployersDataAdd(EmployerType.Trade, 1 * 7);
+                    dat.EmployersDataAdd(EmployerType.Office, 1 * 4);
+                    dat.PlaceDataAdd("Musée des Oiseaux", "CC de la Jardin d'Eden", "Grand Boulevard",
+                                     "Synagogue de la Aurora");
+                    dat.PlaceDataAdd("place de Perroquet", "place de la Rivièrville", "place de l'Orange");
                     return dat;
-                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
-                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
                 }
                 case Quartier.q_Buquet: {
                     dat = new DistrictData("BOUQUET", "Oiselle", "Rivièrville", 21.4f, 122);
@@ -517,7 +532,7 @@
                                      "Marché Carrefour", "Centre Technique Principal", "Centre de Musique",
                                      "Home Cinéma", "Complexe Sportif Longévité", "Lycée Professionnel",
                                      "Centre de l'enfant Jeune", "Salle de concert Sophora");
-                    dat.PlaceDataAdd("place de Parc", "place des Concerts");
+                    dat.PlaceDataAdd("place les Sept Fontaines ", "place des Concerts");
                     return dat;
                 }
                 case Quartier.q_Charite: {
@@ -526,7 +541,7 @@
                     dat.HomeDataAdd("Noi", SocialState.Professional, 2, 21, new int[6] { 0, 3, 3, 3, 3, 3 });
                     dat.EmployersDataAdd(EmployerType.Services, 1 * 1);
                     dat.EmployersDataAdd(EmployerType.Culture, 1 * 24);
-                    dat.PlaceDataAdd("Grand Boulevard", "Synagogue de Cœur Saint");
+                    dat.PlaceDataAdd("Grand Boulevard", "Synagogue de Sacré Cœur");
                     dat.PlaceDataAdd("place de la Bonne Volonté");
                     dat.PlaceDataAdd("parc de la Sainteté");
                     return dat;
@@ -536,7 +551,7 @@
                     dat.HomeDataAdd("Blu", SocialState.Specialist, 2, 35, new int[5] { 0, 3, 3, 3, 3 });
                     dat.HomeDataAdd("Noi", SocialState.Specialist, 2, 34, new int[5] { 0, 2, 2, 2, 2 });
                     dat.EmployersDataAdd(EmployerType.Sport, 1 * 8);
-                    dat.EmployersDataAdd(EmployerType.Education, 1 * 6);
+                    dat.EmployersDataAdd(EmployerType.Education, 1 * 15 + 1 * 6);
                     dat.EmployersDataAdd(EmployerType.Services, 1 * 1);
                     dat.EmployersDataAdd(EmployerType.Production, 2 * 4);
                     dat.EmployersDataAdd(EmployerType.Office, 1 * 6 + 2 * 4);
@@ -544,12 +559,23 @@
                     dat.PlaceDataAdd("parc de la Grâce", "parc d'Été", "bois de Hêtres des Contreforts");
                     return dat;
                 }
-                case Quartier.q_Palaisreine: {
-                    dat = new DistrictData("PALAISREINE", "Grâce", "Rivièrville", 38.2f, 287);
-                    dat.HomeDataAdd("---", SocialState.Professional, 2, 75, new int[1] { 10 });
+                case Quartier.q_Reinevue: {
+                    dat = new DistrictData("REINEVUE", "Verger", "Rivièrville", 38.2f, 287);
+                    dat.HomeDataAdd("Ver", SocialState.Professional, 2, 50, new int[4] { 4, 4, 4, 4 });
+                    dat.EmployersDataAdd(EmployerType.Culture, 1 * 24);
+                    dat.EmployersDataAdd(EmployerType.Sport, 1 * 14);
+                    dat.EmployersDataAdd(EmployerType.Education, 1 * 6);
+                    dat.EmployersDataAdd(EmployerType.Services, 2 * 1);
+                    dat.PlaceDataAdd("Manège de la Confrérie", "Palais des Cadeaux", "Boulevard de Palais");
                     return dat;
-                    // Â À Æ Ç É Ê È Ë Î Ï Ô Œ Û Ù Ü Ÿ
-                    // â à æ ç é ê è ë î ï ô œ û ù ü ÿ
+                }
+                case Quartier.q_Flute: {
+                    dat = new DistrictData("FLÛTÉ", "Verger", "Rivièrville", 10.0f, 420);
+                    dat.HomeDataAdd("Col", SocialState.Professional, 2, 16, new int[5] { 4, 10, 10, 10, 10 });
+                    dat.EmployersDataAdd(EmployerType.Production, 6 * 4);
+                    dat.PlaceDataAdd("Fabrique de Pain 'Nuage'");
+                    dat.PlaceDataAdd("place de Bien");
+                    return dat;
                 }
                 case Quartier.q_Parcoiseau: {
                     dat = new DistrictData("PARCOISEAU", "Parcville", "Rivièrville", 196.5f, 140);

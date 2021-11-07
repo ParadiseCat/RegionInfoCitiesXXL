@@ -26,6 +26,7 @@
         c_Oiselle = 420,
         c_Grace = 430,
         c_Parcville = 440,
+        c_Verger = 450,
         c_Conte = 610,
         c_Serein = 620,
         c_Versantvert = 630,

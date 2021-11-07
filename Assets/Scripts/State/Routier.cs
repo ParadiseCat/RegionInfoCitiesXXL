@@ -5,6 +5,7 @@ namespace ParadiseVille
     /// </summary>
     public enum Routier
     {
+        Route_6,
         Route_21,
         None
     }

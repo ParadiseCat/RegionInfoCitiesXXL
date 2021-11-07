@@ -83,7 +83,7 @@ namespace ParadiseVille
                 { "F40DB8", Quartier.q_Chandelle },
                 { "9E7AEF", Quartier.q_Charite },
                 { "0BEAA3", Quartier.q_Charme },
-                { "DB2714", Quartier.q_Cheveche },
+                { "DB2714", Quartier.q_Chatterie },
                 { "313AE0", Quartier.q_Ciel },
                 { "21F90B", Quartier.q_Cocotier },
                 { "E835FF", Quartier.q_Comtefleur },
@@ -96,6 +96,7 @@ namespace ParadiseVille
                 { "ED2644", Quartier.q_Eclaires },
                 { "EC7C10", Quartier.q_Embrume },
                 { "DE664A", Quartier.q_Enchanteur },
+                { "2AA3CC", Quartier.q_Flute},
                 { "03B62F", Quartier.q_Gattilier },
                 { "F0B9C8", Quartier.q_Gare },
                 { "1CEC7C", Quartier.q_Genievre },
@@ -121,7 +122,7 @@ namespace ParadiseVille
                 { "52EC1C", Quartier.q_Nichoir },
                 { "12EA07", Quartier.q_Orchidee },
                 { "4FA4F9", Quartier.q_Ormaie },
-                { "3A69F1", Quartier.q_Palaisreine },
+                { "3A69F1", Quartier.q_Reinevue },
                 { "28A6EF", Quartier.q_Palaisroyal },
                 { "D50CC6", Quartier.q_Parfumeur },
                 { "E75388", Quartier.q_Parcamour },
@@ -195,6 +196,7 @@ namespace ParadiseVille
                 { "C0FA00", Canton.c_Occidental },
                 { "DB2714", Canton.c_Oiselle },
                 { "03B62F", Canton.c_Vanille },
+                { "2AA3CC", Canton.c_Verger},
                 { "7C4AC9", Canton.c_Versantvert },
                 { "5898EE", Canton.c_Volage }
             };
